@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "4836A073-4342-4205-9193-C4C136119717"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4825C510-DE5E-496A-891D-CDA6C69279EC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../var/folders/q5/36b3z_vn04jblmw0mqgfzw080000gn/T/swift-generated-sources/@__swiftmacro_13turns_tracker0018TurnRowswift_jHJJcfMX40_0_33_14DD51536A4CA844655F7EBCD8645EECLl7PreviewfMf_.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2"
+            endingLineNumber = "2"
+            landmarkName = "$s13turns_tracker0018TurnRowswift_jHJJcfMX40_0_33_14DD51536A4CA844655F7EBCD8645EECLl7PreviewfMf_15PreviewRegistryfMu_"
+            landmarkType = "37">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BE53802D-0C05-4470-AFC2-74CDFFC05CB1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../var/folders/q5/36b3z_vn04jblmw0mqgfzw080000gn/T/swift-generated-sources/@__swiftmacro_13turns_tracker0018TurnRowswift_jHJJcfMX40_0_33_14DD51536A4CA844655F7EBCD8645EECLl7PreviewfMf_.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1"
+            endingLineNumber = "1"
+            landmarkName = "$s13turns_tracker0018TurnRowswift_jHJJcfMX40_0_33_14DD51536A4CA844655F7EBCD8645EECLl7PreviewfMf_15PreviewRegistryfMu_"
+            landmarkType = "37">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
