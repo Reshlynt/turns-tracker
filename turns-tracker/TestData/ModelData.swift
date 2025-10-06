@@ -22,3 +22,5 @@ class ModelData {
         TaskAssignment(assignmentTitle: "boys", iconName: "cat-meme")
     ]
 }
+
+// example
