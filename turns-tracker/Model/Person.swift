@@ -7,29 +7,21 @@
 //  Each should contain an id to identify each unique individual, a name, a PIN, and a picture to identify themselves.
 
 import Foundation
+import SwiftData
 import SwiftUI
 
-struct Person: Identifiable, Decodable {
-    let id: String
+@Model
+class Person {
+    // Identifiers of a person
+    var id: UUID
     var name: String
     var pin: Int
-    var photoName: String
+    var imageIconName: String
     
-    // A list of a person's tasks
-    var taskList: [TaskAssignment] = []
-
-    init(name: String, pin: Int, photoName: String, id: String = UUID().uuidString) {
+    init(id: UUID, name: String, pin: Int, imageIconName: String) {
         self.id = id
         self.name = name
         self.pin = pin
-        self.photoName = photoName
-    }
-
-    private var photo: Image? {
-        Image(photoName)
-    }
-    
-    func getPhoto() -> Image? {
-        return photo
+        self.imageIconName = imageIconName
     }
 }

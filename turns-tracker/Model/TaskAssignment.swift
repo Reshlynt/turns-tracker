@@ -7,8 +7,8 @@
 //  PersonAssignment is an object that each contains the name and the icon to represent. This
 //  allows the user to decide what a person is assigned to, customizable to their content.
 
-import SwiftUI
 import Foundation
+import SwiftUI
 
 struct TaskAssignment: Codable, Transferable, Identifiable, Hashable {
     let id: UUID
