@@ -8,11 +8,22 @@
 import SwiftUI
 
 struct PersonQuickInfo: View {
+    
+    var person: Person
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            // TODO: Figure out how to get an image of a person. Basically a profile picture.
+            Image("cat-meme")
+                .resizable()
+                .frame(width: 50, height: 50)
+            Text(person.getName())
+        }
+        .padding()
     }
 }
 
 #Preview {
-    PersonQuickInfo()
+    let person = Person(name: "Davey")
+    PersonQuickInfo(person: person)
 }

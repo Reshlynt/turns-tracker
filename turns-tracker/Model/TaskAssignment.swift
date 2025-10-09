@@ -4,7 +4,7 @@
 //
 //  Created by Scott Do on 9/26/25.
 //
-//  PersonAssignment is an object that each contains the name and the icon to represent. This
+//  PersonAssignment is an object that each contains the name and the icon to represent this task. This
 //  allows the user to decide what a person is assigned to, customizable to their content.
 
 import Foundation
@@ -12,7 +12,7 @@ import SwiftUI
 
 struct TaskAssignment: Codable, Transferable, Identifiable, Hashable {
     let id: UUID
-    let assignmentTitle: String
+    private let assignmentTitle: String
     let iconName: String
     
     private var icon: Image? {
