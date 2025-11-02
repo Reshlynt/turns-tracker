@@ -7,6 +7,8 @@
 //  This is a task assignment that would appear on a person's task row.
 //  Each is unique to a person, though the assignments need only persist until the day is done.
 
+// TODO: A TaskAssignment is a task that a Person is assigned. All Persons objects contain an array of TaskAssignments that denote what task they are supposed to do.
+
 import Foundation
 import SwiftData
 

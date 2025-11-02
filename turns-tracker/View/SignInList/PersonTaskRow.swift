@@ -5,6 +5,8 @@
 //  Created by Scott Do on 10/9/25.
 //
 
+// TODO: This struct showcases all tasks on the task row. This should be interactable in that the user can drag task into and out of this row. 
+
 import SwiftUI
 
 struct PersonTaskRow: View {

@@ -6,6 +6,8 @@
 //  A Person is a model that holds important information about an individual doing a task.
 //  Each should contain an id to identify each unique individual, a name, a PIN, and a picture to identify themselves.
 
+// TODO: A Person should be stored on a database that this app retains to keep a record of all technicians that are recorded. They are organized by which is entered first.
+
 import Foundation
 import SwiftData
 

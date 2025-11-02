@@ -5,6 +5,8 @@
 //  Created by Scott Do on 10/9/25.
 //
 
+// TODO: This should be the main scene that a user sees. It provides a list of people that are *signed in* to the app.
+
 import SwiftUI
 import SwiftData
 
