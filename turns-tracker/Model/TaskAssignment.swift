@@ -1,35 +1,26 @@
 //
-//  PersonAssignment.swift
+//  Task.swift
 //  turns-tracker
 //
-//  Created by Scott Do on 9/26/25.
+//  Created by Scott Do on 10/9/25.
 //
-//  PersonAssignment is an object that each contains the name and the icon to represent this task. This
-//  allows the user to decide what a person is assigned to, customizable to their content.
+//  This is a task assignment that would appear on a person's task row.
+//  Each is unique to a person, though the assignments need only persist until the day is done.
 
 import Foundation
-import SwiftUI
+import SwiftData
 
-struct TaskAssignment: Codable, Transferable, Identifiable, Hashable {
-    let id: UUID
-    private let assignmentTitle: String
-    let iconName: String
+@Model
+class TaskAssignment: Identifiable {
+    var id: UUID = UUID()
+    var title: String
+    var order: Int
+    var imageName: String
     
-    private var icon: Image? {
-        Image(iconName)
+    init(title: String, order: Int = 0, imageName: String = "cat-meme") {
+        self.title = title
+        self.order = order
+        self.imageName = imageName
     }
     
-    init(id: UUID = UUID(), assignmentTitle: String, iconName: String) {
-        self.id = id
-        self.assignmentTitle = assignmentTitle
-        self.iconName = iconName
-    }
-    
-    static var transferRepresentation: some TransferRepresentation {
-        CodableRepresentation(contentType: .taskAssignment)
-    }
-    
-    func getIcon() -> Image? {
-        return icon
-    }
 }

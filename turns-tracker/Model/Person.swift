@@ -8,7 +8,6 @@
 
 import Foundation
 import SwiftData
-import SwiftUI
 
 @Model
 class Person: Identifiable {
@@ -17,6 +16,7 @@ class Person: Identifiable {
     var id: UUID = UUID()
     private var name: String
     var pin: String
+    var tasks: [TaskAssignment] = []
     
     // TODO: Figure out how to get a picture of a person onto this without putting the image into SwiftData
     
