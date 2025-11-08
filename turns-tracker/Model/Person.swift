@@ -14,17 +14,19 @@ import SwiftData
 @Model
 class Person: Identifiable {
     
-    // Identifiers of a person
-    var id: UUID = UUID()
+    private(set) var id: UUID
     private var name: String
     var pin: String
     var tasks: [TaskAssignment] = []
+    var checkedIn: Bool
     
     // TODO: Figure out how to get a picture of a person onto this without putting the image into SwiftData
     
     init(name: String) {
+        self.id = UUID()
         self.name = name
         self.pin = Self.generatePinString()
+        self.checkedIn = false
     }
     
     
