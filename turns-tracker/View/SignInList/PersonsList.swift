@@ -37,5 +37,4 @@ struct PersonsList: View {
 
 #Preview {
     PersonsList()
-        .modelContainer(for: Person.self, inMemory: true)
 }
