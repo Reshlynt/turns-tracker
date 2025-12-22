@@ -13,8 +13,12 @@ struct turns_trackerApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack {
+                // your app's root view — ensure ContentView (or whatever) contains
+                // navigation to PersonRegisterPrompt and PeopleDatabase, or embed them here
+                ContentView()
+            }
         }
-        .modelContainer(for: Person.self)
+        .modelContainer(for: [Person.self])
     }
 }

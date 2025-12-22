@@ -10,16 +10,27 @@ import SwiftData
 
 struct ContentView: View {
 //    // Loads persistent data storage space
-//    @Environment(\.modelContext) var modelContext
-//    
+      @Environment(\.modelContext) var modelContext
+//
 //    // Asks code to go get this query of people.
 //    @Query var people: [Person]
     var body: some View {
-        PersonsList()
+        NavigationView {
+            VStack {
+                NavigationLink("Show People") {
+                    PeopleDatabase()
+                }
+                
+                NavigationLink("Register People") {
+                    PersonRegisterPrompt()
+                    
+                }
+            }
+        }
     }
 }
 
 #Preview {
     ContentView()
-        .modelContainer(for: Person.self, inMemory: true)
+        .modelContainer(for: [Person.self], inMemory: true)
 }

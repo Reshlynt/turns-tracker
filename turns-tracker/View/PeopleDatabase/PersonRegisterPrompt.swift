@@ -14,37 +14,44 @@ struct PersonRegisterPrompt: View {
     
     @Environment(\.modelContext) var modelContext
     
-    
     // TODO: This is where you would assign a picture of the person. Discern how to prompt for that.
     @State private var name: String = ""
     
     var body: some View {
-        Text("Enter the name of the person to register. A PIN will be automatically generated.")
-        
-        TextField("Name", text: $name)
-        Button(action: {
-            if !name.isEmpty {
-                addPerson(name: name)
-            }
-        }, label: {
-            Text("Save to database")
-        })
+        VStack {
+            Text("Enter the name of the person to register. A PIN will be automatically generated.")
+            
+            
+            TextField("Name", text: $name)
+            Button(action: {
+                if !name.isEmpty {
+                    if addPerson(name: name) {
+                        print("save successful")
+                    } else {
+                        print("save failed")
+                    }
+                    name = ""
+                } else {
+                    print("name empty")
+                }
+            }, label: {
+                Text("Save to database")
+            })
+        }
+        .navigationTitle("Register a person")
     }
     
-    private func addPerson(name: String) -> () {
+    private func addPerson(name: String) -> Bool {
         let newPerson = Person(name: name)
         modelContext.insert(newPerson)
-        if modelContext.hasChanges {
-            print("Yes, it has changes")
-        }
-        else {
-            print("No, it does not have changes.")
-        }
         do {
             try modelContext.save()
+            // persist changes to the container
             print("model context saved")
+            return true
         } catch {
-            print(error.localizedDescription)
+            print("Failed to save modelContext:", error.localizedDescription)
+            return false
         }
         
     }

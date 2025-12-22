@@ -22,6 +22,13 @@ struct PersonsList: View {
     // TODO: Consider this, each day a person signs in to the application and their name appears here. On day's end, this should be cleared empty, added once more based on who signs in first.
     
     var body: some View {
+        Text("Currently Signed In")
+            .font(.title)
+            .padding()
+            .frame(alignment: .center)
+        
+        Divider()
+        
         ScrollView {
             VStack {
                 ForEach(checkedPeople, id: \.self) { individual in
@@ -37,4 +44,5 @@ struct PersonsList: View {
 
 #Preview {
     PersonsList()
+        .modelContainer(for: [Person.self], inMemory: true)
 }

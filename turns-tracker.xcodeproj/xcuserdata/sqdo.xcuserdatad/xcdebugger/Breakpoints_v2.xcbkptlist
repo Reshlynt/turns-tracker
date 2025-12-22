@@ -50,6 +50,96 @@
             endingLineNumber = "14"
             landmarkName = "PersonRegisterPrompt"
             landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "3181CF99-2C2A-4607-918E-2D30AD335F7D - 33ef7477c52d2657"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "turns_tracker.PersonRegisterPrompt.modelContext.getter : SwiftData.ModelContext"
+                  moduleName = "turns-tracker.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sqdo/Desktop/turns-tracker/turns-tracker/View/PeopleDatabase/PersonRegisterPrompt.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0">
+               </Location>
+               <Location
+                  uuid = "3181CF99-2C2A-4607-918E-2D30AD335F7D - 6417cef745994d73"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "turns_tracker.PersonRegisterPrompt.init() -&gt; turns_tracker.PersonRegisterPrompt"
+                  moduleName = "turns-tracker.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sqdo/Desktop/turns-tracker/turns-tracker/View/PeopleDatabase/PersonRegisterPrompt.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15">
+               </Location>
+               <Location
+                  uuid = "3181CF99-2C2A-4607-918E-2D30AD335F7D - 9db3e627a3745578"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "default argument 0 of turns_tracker.PersonRegisterPrompt.init(modelContext: SwiftUI.Environment&lt;SwiftData.ModelContext&gt;) -&gt; turns_tracker.PersonRegisterPrompt"
+                  moduleName = "turns-tracker.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sqdo/Desktop/turns-tracker/turns-tracker/View/PeopleDatabase/PersonRegisterPrompt.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D68F3D05-5CF5-4ADD-BD27-F18F06CCBFB8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "turns-tracker/View/PeopleDatabase/PersonRegisterPrompt.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "PersonRegisterPrompt"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "D68F3D05-5CF5-4ADD-BD27-F18F06CCBFB8 - c10b6aa1fc559bc9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "property wrapper backing initializer of turns_tracker.PersonRegisterPrompt.name : Swift.String"
+                  moduleName = "turns-tracker.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sqdo/Desktop/turns-tracker/turns-tracker/View/PeopleDatabase/PersonRegisterPrompt.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0">
+               </Location>
+               <Location
+                  uuid = "D68F3D05-5CF5-4ADD-BD27-F18F06CCBFB8 - ed8c3a3140d72157"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "turns_tracker.PersonRegisterPrompt.init(modelContext: SwiftUI.Environment&lt;SwiftData.ModelContext&gt;) -&gt; turns_tracker.PersonRegisterPrompt"
+                  moduleName = "turns-tracker.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sqdo/Desktop/turns-tracker/turns-tracker/View/PeopleDatabase/PersonRegisterPrompt.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

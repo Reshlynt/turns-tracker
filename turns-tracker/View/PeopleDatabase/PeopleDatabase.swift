@@ -24,6 +24,7 @@ struct PeopleDatabase: View {
                     Image("cat-meme")
                         .resizable()
                         .scaledToFit()
+                        .frame(width: 50)
                         .padding()
                     Divider().padding()
                     Text(person.getName())
@@ -43,4 +44,5 @@ struct PeopleDatabase: View {
 
 #Preview {
     PeopleDatabase()
+        .modelContainer(for: [Person.self])
 }
