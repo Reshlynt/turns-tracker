@@ -15,15 +15,13 @@ struct ContentView: View {
 //    // Asks code to go get this query of people.
 //    @Query var people: [Person]
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 NavigationLink("Show People") {
                     PeopleDatabase()
                 }
-                
-                NavigationLink("Register People") {
-                    PersonRegisterPrompt()
-                    
+                NavigationLink("Sign in prompt test") {
+                    SignInList()
                 }
             }
         }
@@ -32,5 +30,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: [Person.self], inMemory: true)
+        .modelContainer(for: [Person.self])
 }

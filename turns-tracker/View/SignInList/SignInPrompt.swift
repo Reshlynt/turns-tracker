@@ -2,47 +2,81 @@
 //  SignInPrompt.swift
 //  turns-tracker
 //
-//  Created by Scott Do on 10/28/25.
+//  Created by Scott Do on 1/7/26.
 //
-
-// TODO: This view is the sign in prompt where the user signs in someone with the matching PIN. It should look ideally like a typical iOS dialpad. There should be a way to exit out of the window, and signing in with the correct PIN and PINs with not user assigned cases.
 
 import SwiftUI
 import SwiftData
 
 struct SignInPrompt: View {
+    @Environment(\.modelContext) var modelContext
+    @Environment(\.dismiss) private var dismiss
     
-    @State private var PIN: String = ""
-    @State private var placeholder: String = "PIN"
+    @Query var recordedPersons: [Person]
+    
+    @State private var pin = ""
+    @State private var personToSearch: Person? = nil
+    
+    // Functions to be used by SignInList
+    var onAdd: (Person) -> Void
+    var onCancel: () -> Void
     
     var body: some View {
-        VStack {
-            Text("Type in your PIN:")
-            TextField(placeholder, text: $PIN)
-            Button(action: {
-                if verifyPin(pin: PIN) {
-                    placeholder = "Signed in person."
-                } else {
-                    placeholder = "Invalid PIN."
+        NavigationStack {
+            Form {
+                TextField("PIN", text: $pin)
+            }
+            .navigationTitle("Enter PIN")
+            .toolbar {
+                ToolbarItem (placement: .confirmationAction) {
+                    Button("Sign in") {
+                        
+                        personToSearch = findPersonByPin(pin: pin)
+                        
+                        // The goal is to find the person with the correct PIN identical to one produced by the user.
+                        onAdd(personToSearch!)
+                        dismiss()
+                    }.disabled(pin.isEmpty || pin.count > 6)
                 }
-                PIN = ""
-            }, label: {
-                Text("Confirm")
-                    .font(.callout)
-            })
+                ToolbarItem (placement: .cancellationAction) {
+                    Button("Cancel") {
+                        onCancel()
+                        dismiss()
+                    }
+                }
+            }
         }
     }
     
-    private func verifyPin(pin: String) -> Bool {
-        if(pin.count != 6) {
-            return false
+    // This function finds a person from the People Database stored in SwiftData
+    private func findPersonByPin(pin: String) -> (Person) {
+        // PIN should be a "numerical value and does not need to be capitalized or lower-cased. It is comparing if either of the two are identical.
+        
+        var personToSend: Person? = nil
+        
+        // Check for possible errors
+        if (pin.isEmpty || pin.count > 6) {
+            return personToSend!
         }
-        return true
+        
+        for person in recordedPersons {
+            if pin == person.pin {
+                personToSend = person
+                break
+            }
+        }
+        
+        return personToSend!
     }
 }
 
-
-
 #Preview {
-    SignInPrompt()
+    //SignInPrompt()
+    SignInPrompt { _ in
+        
+        
+        
+    } onCancel: {
+        
+    }
 }

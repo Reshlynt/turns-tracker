@@ -15,30 +15,81 @@ struct PeopleDatabase: View {
     // TODO: Be able to add and remove people from this database and save the result.
     
     @Environment(\.modelContext) var modelContext
-    @Query var people: [Person]
+    @Query var recordedPersons: [Person]
+    
+    // Status to store what people the user wants to delete.
+    @State private var personToDelete: Person?
+    
+    // Add-sheet to add in people
+    @State private var showingAddSheet = false
         
     var body: some View {
-        VStack {
-            List(people) { person in
+        List {
+            ForEach(recordedPersons) { person in
                 HStack {
                     Image("cat-meme")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 50)
-                        .padding()
-                    Divider().padding()
-                    Text(person.getName())
-                    Divider().padding()
-                    Text("PIN: " + person.pin)
+                        .clipShape(RoundedRectangle(cornerRadius: 6))
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 5)
+                    
+                    VStack {
+                        Text(person.getName())
+                            .font(.headline)
+                        Text("PIN: " + person.pin)
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
+                    Spacer()
+                }
+                // Two fingers on the touchpad to delete.
+                .swipeActions(edge: .trailing) {
+                    Button(role: .destructive) {
+                        delete(person)
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
                 }
             }
-            .navigationTitle("Recorded Persons")
-            
-            // What I want is the user to look for a button to add a person to this list. They will then be prompted with a form to add their name and their image.
+        }
+        .navigationTitle("Recorded Persons")
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button(action: { showingAddSheet = true }) {
+                    Label("Add", systemImage: "plus")
+                }
+            }
+        }
+        .alert(item: $personToDelete) { person in
+            Alert(
+                title: Text("Delete \"\(person.getName())\"?"),
+                message: Text("This will permantly delete this person and any local data associated with it."),
+                primaryButton: .destructive(Text("Delete")) {
+                    delete(person)
+                },
+                secondaryButton: .cancel()
+            )
+        }
+        .sheet(isPresented: $showingAddSheet) {
+            // Here, the arguments here are the FUNCTIONS for onAdd and onCancel.
+            AddPersonForm { newPerson in
+                modelContext.insert(newPerson)
+                showingAddSheet = false
+            } onCancel: {
+                showingAddSheet = false
+            }
         }
     }
     
+    
+    private func delete (_ person: Person) {
+        modelContext.delete(person)
+    }
 }
+
+
 
 // The line for adding things into the database is {modelContext}.insert(student)
 

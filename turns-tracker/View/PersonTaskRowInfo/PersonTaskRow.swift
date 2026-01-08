@@ -11,7 +11,7 @@ import SwiftUI
 
 struct PersonTaskRow: View {
     
-    var taskRow: [TaskAssignment]
+    @State var taskRow: [TaskAssignment]
     
     var body: some View {
         ZStack {
