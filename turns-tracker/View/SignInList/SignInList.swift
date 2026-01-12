@@ -9,7 +9,9 @@ import SwiftUI
 import SwiftData
 
 struct SignInList: View {
-    @Environment(\.modelContext) var modelContext
+    @Environment(\.modelContext) var modelContext2
+    @Environment(\.dismiss) private var dismiss
+    
     @Query var signedInPeople: [Person]
     
     @State private var showSignInForm = false
@@ -32,7 +34,7 @@ struct SignInList: View {
                 }
             }
             
-            ToolbarItem {
+            ToolbarItem(placement: .primaryAction) {
                 Button(action: wipeAllSignedIn) {
                     Label("Delete all", systemImage: "trash")
                 }
@@ -40,7 +42,7 @@ struct SignInList: View {
         }
         .sheet(isPresented: $showSignInForm) {
             SignInPrompt { signedPerson in
-                modelContext.insert(signedPerson)
+                modelContext2.insert(signedPerson)
                 showSignInForm = false
             } onCancel: {
                 showSignInForm = false
@@ -53,7 +55,7 @@ struct SignInList: View {
     // Wipes all people signed into the program.
     private func wipeAllSignedIn() {
         do {
-            try modelContext.delete(model: Person.self)
+            try modelContext2.delete(model: Person.self)
         } catch {
             print(error)
         }

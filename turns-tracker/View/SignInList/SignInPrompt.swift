@@ -22,7 +22,6 @@ struct SignInPrompt: View {
     var onCancel: () -> Void
     
     var body: some View {
-        NavigationStack {
             Form {
                 TextField("PIN", text: $pin)
             }
@@ -31,7 +30,7 @@ struct SignInPrompt: View {
                 ToolbarItem (placement: .confirmationAction) {
                     Button("Sign in") {
                         
-                        personToSearch = findPersonByPin(pin: pin)
+                        
                         
                         // The goal is to find the person with the correct PIN identical to one produced by the user.
                         onAdd(personToSearch!)
@@ -45,18 +44,17 @@ struct SignInPrompt: View {
                     }
                 }
             }
-        }
     }
     
     // This function finds a person from the People Database stored in SwiftData
-    private func findPersonByPin(pin: String) -> (Person) {
+    private func findPersonByPin(pin: String) -> (Bool) {
         // PIN should be a "numerical value and does not need to be capitalized or lower-cased. It is comparing if either of the two are identical.
         
         var personToSend: Person? = nil
         
         // Check for possible errors
         if (pin.isEmpty || pin.count > 6) {
-            return personToSend!
+            return false
         }
         
         for person in recordedPersons {
@@ -66,7 +64,12 @@ struct SignInPrompt: View {
             }
         }
         
-        return personToSend!
+        if let p = personToSend {
+            personToSearch = personToSend
+        } else {
+            return false
+        }
+        return true
     }
 }
 

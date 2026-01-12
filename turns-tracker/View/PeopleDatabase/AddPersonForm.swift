@@ -18,7 +18,6 @@ struct AddPersonForm: View {
     var onCancel: () -> Void
     
     var body: some View {
-        NavigationStack {
             Form {
                 TextField("Name", text: $name)
             }
@@ -38,7 +37,6 @@ struct AddPersonForm: View {
                     }
                 }
             }
-        }
     }
 }
 

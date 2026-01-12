@@ -16,13 +16,11 @@ struct ContentView: View {
 //    @Query var people: [Person]
     var body: some View {
         NavigationStack {
-            VStack {
-                NavigationLink("Show People") {
-                    PeopleDatabase()
-                }
-                NavigationLink("Sign in prompt test") {
-                    SignInList()
-                }
+            NavigationLink("Show People") {
+                PeopleDatabase()
+            }
+            NavigationLink("Sign in prompt test") {
+                SignInList()
             }
         }
     }

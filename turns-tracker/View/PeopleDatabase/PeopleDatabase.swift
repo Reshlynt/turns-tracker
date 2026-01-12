@@ -15,6 +15,7 @@ struct PeopleDatabase: View {
     // TODO: Be able to add and remove people from this database and save the result.
     
     @Environment(\.modelContext) var modelContext
+    @Environment(\.dismiss) private var dismiss
     @Query var recordedPersons: [Person]
     
     // Status to store what people the user wants to delete.
@@ -54,13 +55,21 @@ struct PeopleDatabase: View {
                 }
             }
         }
-        .navigationTitle("Recorded Persons")
+        .navigationTitle("Recorded persons")
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button(action: { showingAddSheet = true }) {
                     Label("Add", systemImage: "plus")
                 }
             }
+            
+//            ToolbarItem(placement: .navigation) {
+//                Button {
+//                    dismiss()
+//                } label: {
+//                    Label("Back", systemImage: "chevron.left")
+//                }
+//            }
         }
         .alert(item: $personToDelete) { person in
             Alert(
