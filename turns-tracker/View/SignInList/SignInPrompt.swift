@@ -14,6 +14,7 @@ struct SignInPrompt: View {
     
     @Query var recordedPersons: [Person]
     
+    
     @State private var pin = ""
     @State private var personToSearch: Person? = nil
     
@@ -30,10 +31,13 @@ struct SignInPrompt: View {
                 ToolbarItem (placement: .confirmationAction) {
                     Button("Sign in") {
                         
+                        if findPersonByPin(pin: pin) {
+                            print("yes")
+                            onAdd(personToSearch!)
+                        } else {
+                            print("no")
+                        }
                         
-                        
-                        // The goal is to find the person with the correct PIN identical to one produced by the user.
-                        onAdd(personToSearch!)
                         dismiss()
                     }.disabled(pin.isEmpty || pin.count > 6)
                 }
@@ -64,7 +68,7 @@ struct SignInPrompt: View {
             }
         }
         
-        if let p = personToSend {
+        if personToSend?.pin == pin {
             personToSearch = personToSend
         } else {
             return false

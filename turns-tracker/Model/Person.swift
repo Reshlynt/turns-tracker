@@ -17,7 +17,7 @@ class Person: Identifiable {
     private(set) var id: UUID
     private var name: String
     var pin: String
-    var tasks: [TaskAssignment] = []
+//    var tasks: [TaskAssignment] = []
     var checkedIn: Bool
     
     // TODO: Figure out how to get a picture of a person onto this without putting the image into SwiftData

@@ -55,21 +55,13 @@ struct PeopleDatabase: View {
                 }
             }
         }
-        .navigationTitle("Recorded persons")
+        //.navigationTitle("Recorded persons")
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button(action: { showingAddSheet = true }) {
                     Label("Add", systemImage: "plus")
                 }
             }
-            
-//            ToolbarItem(placement: .navigation) {
-//                Button {
-//                    dismiss()
-//                } label: {
-//                    Label("Back", systemImage: "chevron.left")
-//                }
-//            }
         }
         .alert(item: $personToDelete) { person in
             Alert(

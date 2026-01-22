@@ -9,24 +9,22 @@ import SwiftUI
 import SwiftData
 
 struct SignInList: View {
-    @Environment(\.modelContext) var modelContext2
     @Environment(\.dismiss) private var dismiss
-    
-    @Query var signedInPeople: [Person]
-    
+    @State private var signedInPeople: [TaskPerson] = []
     @State private var showSignInForm = false
     
     var body: some View {
         List {
             ForEach(signedInPeople) { taskPerson in
                 HStack {
-                    PersonQuickInfo(person: taskPerson)
+                    PersonQuickInfo(person: taskPerson.getAssociatedPerson())
                     
                     PersonTaskRow(taskRow: taskPerson.tasks)
                 }
             }
         }
-        .navigationTitle("Signed In People")
+        //.navigationTitle("Signed In People")
+        //TODO: The left chevron for the navigation stack seems to have a problem where it is hidden by the navigation title. Come back to it later.
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button(action: { showSignInForm = true }) {
@@ -42,7 +40,7 @@ struct SignInList: View {
         }
         .sheet(isPresented: $showSignInForm) {
             SignInPrompt { signedPerson in
-                modelContext2.insert(signedPerson)
+                signedInPeople.append(signedPerson)
                 showSignInForm = false
             } onCancel: {
                 showSignInForm = false
@@ -54,11 +52,7 @@ struct SignInList: View {
     
     // Wipes all people signed into the program.
     private func wipeAllSignedIn() {
-        do {
-            try modelContext2.delete(model: Person.self)
-        } catch {
-            print(error)
-        }
+        signedInPeople.removeAll()
     }
 }
 
