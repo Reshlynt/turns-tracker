@@ -10,6 +10,7 @@ import SwiftData
 
 struct SignInList: View {
     @Environment(\.dismiss) private var dismiss
+    
     @State private var signedInPeople: [TaskPerson] = []
     @State private var showSignInForm = false
     
@@ -18,8 +19,7 @@ struct SignInList: View {
             ForEach(signedInPeople) { taskPerson in
                 HStack {
                     PersonQuickInfo(person: taskPerson.getAssociatedPerson())
-                    
-                    PersonTaskRow(taskRow: taskPerson.tasks)
+                    PersonTaskRow(taskRow: taskPerson.taskAssignmentList)
                 }
             }
         }

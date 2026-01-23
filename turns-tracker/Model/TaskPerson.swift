@@ -14,8 +14,8 @@ class TaskPerson: Identifiable {
     private var associatedPerson: Person
     var taskAssignmentList: [TaskAssignment] = []
     
-    init(id: UUID, associatedPerson: Person, taskAssignmentList: TaskAssignment) {
-        self.id = id
+    init(associatedPerson: Person) {
+        self.id = UUID()
         self.associatedPerson = associatedPerson
     }
     

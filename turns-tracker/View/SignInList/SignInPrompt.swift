@@ -16,10 +16,10 @@ struct SignInPrompt: View {
     
     
     @State private var pin = ""
-    @State private var personToSearch: Person? = nil
+    @State private var personToSearch: TaskPerson? = nil
     
     // Functions to be used by SignInList
-    var onAdd: (Person) -> Void
+    var onAdd: (TaskPerson) -> Void
     var onCancel: () -> Void
     
     var body: some View {
@@ -52,28 +52,32 @@ struct SignInPrompt: View {
     
     // This function finds a person from the People Database stored in SwiftData
     private func findPersonByPin(pin: String) -> (Bool) {
-        // PIN should be a "numerical value and does not need to be capitalized or lower-cased. It is comparing if either of the two are identical.
+        // First, reset the result to ensure that you don't bring the last one in
         
-        var personToSend: Person? = nil
+        personToSearch = nil
         
-        // Check for possible errors
-        if (pin.isEmpty || pin.count > 6) {
+        // Second, check for if there is a pin. If there is not a vaild PIN, return false.
+        if (pin.count != 6 || pin.isEmpty) {
             return false
         }
         
+        // If conditions are true, loop through the database to find the right person, and then create a TaskPerson.
+        
+        var foundPerson: Person? = nil
         for person in recordedPersons {
             if pin == person.pin {
-                personToSend = person
+                foundPerson = person
                 break
             }
         }
         
-        if personToSend?.pin == pin {
-            personToSearch = personToSend
-        } else {
+        // Check if there is a result. If the person is not found, return false.
+        if foundPerson == nil {
             return false
+        } else {
+            personToSearch = TaskPerson(associatedPerson: foundPerson!)
+            return true
         }
-        return true
     }
 }
 
