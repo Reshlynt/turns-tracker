@@ -11,7 +11,7 @@ import SwiftData
 struct ContentView: View {
 //    // Loads persistent data storage space
     @Environment(\.modelContext) var modelContext
-    @Environment(\.modelContext) var modelContext2
+//    @Environment(\.modelContext) var modelContext2
 //
 //    // Asks code to go get this query of people.
 //    @Query var people: [Person]
@@ -29,5 +29,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: [Person.self])
+        .modelContainer(for: [Person.self, TaskPerson.self])
 }

@@ -11,7 +11,7 @@ import SwiftData
 @main
 struct turns_trackerApp: App {
     
-    // Attempt of two ModelContainers
+    // Attempt of ModelContainers
     let mainContainer: ModelContainer
     
     init() {
@@ -29,8 +29,9 @@ struct turns_trackerApp: App {
         WindowGroup {
             NavigationStack {
                 ContentView()
-                    .modelContainer(mainContainer)
+                    
             }
         }
+        .modelContainer(mainContainer)
     }
 }

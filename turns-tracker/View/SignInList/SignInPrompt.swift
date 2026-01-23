@@ -14,7 +14,6 @@ struct SignInPrompt: View {
     
     @Query var recordedPersons: [Person]
     
-    
     @State private var pin = ""
     @State private var personToSearch: TaskPerson? = nil
     

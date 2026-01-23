@@ -9,9 +9,10 @@ import SwiftUI
 import SwiftData
 
 struct SignInList: View {
+    @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) private var dismiss
     
-    @State private var signedInPeople: [TaskPerson] = []
+    @Query private var signedInPeople: [TaskPerson]
     @State private var showSignInForm = false
     
     var body: some View {
@@ -40,7 +41,7 @@ struct SignInList: View {
         }
         .sheet(isPresented: $showSignInForm) {
             SignInPrompt { signedPerson in
-                signedInPeople.append(signedPerson)
+                modelContext.insert(signedPerson)
                 showSignInForm = false
             } onCancel: {
                 showSignInForm = false
@@ -52,10 +53,15 @@ struct SignInList: View {
     
     // Wipes all people signed into the program.
     private func wipeAllSignedIn() {
-        signedInPeople.removeAll()
+        do {
+            try modelContext.delete(model: TaskPerson.self)
+        } catch {
+            fatalError(error.localizedDescription)
+        }
     }
 }
 
 #Preview {
     SignInList()
+        .modelContainer(for: [Person.self, TaskPerson.self])
 }
