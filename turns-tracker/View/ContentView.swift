@@ -27,7 +27,7 @@ struct ContentView: View {
                 }
             }
         } detail: {
-            Color.blue
+            
         }
         .navigationSplitViewStyle(.balanced)
     }

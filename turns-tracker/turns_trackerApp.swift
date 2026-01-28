@@ -27,10 +27,8 @@ struct turns_trackerApp: App {
 
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
-                ContentView()
+            ContentView()
                     
-            }
         }
         .modelContainer(mainContainer)
     }
