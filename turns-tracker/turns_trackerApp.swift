@@ -17,9 +17,8 @@ struct turns_trackerApp: App {
     init() {
         do {
             let config1 = ModelConfiguration("database1", schema: Schema([Person.self]) )
-            let config2 = ModelConfiguration("database2", schema: Schema([TaskPerson.self]), isStoredInMemoryOnly: true )
             
-            mainContainer = try ModelContainer(for: Person.self, configurations: config1, config2)
+            mainContainer = try ModelContainer(for: Person.self, configurations: config1)
         } catch {
             fatalError("Failed to configure SwiftData container.")
         }
@@ -28,7 +27,6 @@ struct turns_trackerApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                    
         }
         .modelContainer(mainContainer)
     }

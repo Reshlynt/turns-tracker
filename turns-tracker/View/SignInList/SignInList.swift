@@ -12,17 +12,14 @@ struct SignInList: View {
     @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) private var dismiss
     
-    @Query private var signedInPeople: [TaskPerson]
+    
     @State private var showSignInForm = false
     
     var body: some View {
         List {
-            ForEach(signedInPeople) { taskPerson in
-                HStack {
-                    PersonQuickInfo(person: taskPerson.getAssociatedPerson())
-                    PersonTaskRow(taskRow: taskPerson.taskAssignmentList)
-                }
-            }
+//            ForEach(signedInPeople) { taskPerson in
+//                
+//            }
         }
         //.navigationTitle("Signed In People")
         //TODO: The left chevron for the navigation stack seems to have a problem where it is hidden by the navigation title. Come back to it later.
@@ -54,7 +51,7 @@ struct SignInList: View {
     // Wipes all people signed into the program.
     private func wipeAllSignedIn() {
         do {
-            try modelContext.delete(model: TaskPerson.self)
+//            try modelContext.delete(model: TaskPerson.self)
         } catch {
             fatalError(error.localizedDescription)
         }
@@ -63,5 +60,5 @@ struct SignInList: View {
 
 #Preview {
     SignInList()
-        .modelContainer(for: [Person.self, TaskPerson.self])
+        .modelContainer(for: [Person.self])
 }
