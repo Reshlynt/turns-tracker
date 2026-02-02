@@ -38,7 +38,7 @@ struct ContentView: View {
             case .peopleDatabase:
                 PeopleDatabase()
             case .signInList:
-                SignInList()
+                Text("ya mum")
             }
         }
 }
@@ -78,6 +78,6 @@ extension String {
 
 #Preview {
     ContentView()
-        .modelContainer(for: [Person.self, TaskPerson.self])
+        .modelContainer(for: [Person.self])
 }
 

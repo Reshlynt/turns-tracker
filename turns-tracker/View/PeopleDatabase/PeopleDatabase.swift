@@ -96,5 +96,5 @@ struct PeopleDatabase: View {
 
 #Preview {
     PeopleDatabase()
-        .modelContainer(for: [Person.self, TaskPerson.self])
+        .modelContainer(for: [Person.self])
 }

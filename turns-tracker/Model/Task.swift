@@ -7,13 +7,12 @@
 //  This is a task assignment that would appear on a person's task row.
 //  Each is unique to a person, though the assignments need only persist until the day is done.
 
-// TODO: A TaskAssignment is a task that a Person is assigned. All Persons objects contain an array of TaskAssignments that denote what task they are supposed to do.
+// TODO: A TaskAssignment is a task is assigned to a Person. All Persons objects contain an array of TaskAssignments that denote what task they are supposed to do. This array would be the Taskrow
 
 import Foundation
 import SwiftData
 
-@Model
-class TaskAssignment: Identifiable {
+class Task: Identifiable, ObservableObject {
     var id: UUID = UUID()
     var title: String
     var order: Int

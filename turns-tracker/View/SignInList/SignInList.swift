@@ -7,58 +7,53 @@
 
 import SwiftUI
 import SwiftData
-
 struct SignInList: View {
+    
+    // Environment variables
     @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) private var dismiss
-    
-    
+
+    // State variables
     @State private var showSignInForm = false
+    @State private var signedInPeople: [Person] = [Person(name: "Jonah")]
     
     var body: some View {
         List {
-//            ForEach(signedInPeople) { taskPerson in
-//                
-//            }
-        }
-        //.navigationTitle("Signed In People")
-        //TODO: The left chevron for the navigation stack seems to have a problem where it is hidden by the navigation title. Come back to it later.
-        .toolbar {
-            ToolbarItem(placement: .primaryAction) {
-                Button(action: { showSignInForm = true }) {
-                    Label("Add", systemImage: "plus")
-                }
-            }
-            
-            ToolbarItem(placement: .primaryAction) {
-                Button(action: wipeAllSignedIn) {
-                    Label("Delete all", systemImage: "trash")
+            ForEach(signedInPeople) { person in
+                HStack {
+                    PersonQuickInfo(person: person)
+                    
                 }
             }
         }
-        .sheet(isPresented: $showSignInForm) {
-            SignInPrompt { signedPerson in
-                modelContext.insert(signedPerson)
-                showSignInForm = false
-            } onCancel: {
-                showSignInForm = false
-            }
-        }
-        .labelStyle(TitleAndIconLabelStyle())
     }
     
-    
-    // Wipes all people signed into the program.
-    private func wipeAllSignedIn() {
-        do {
-//            try modelContext.delete(model: TaskPerson.self)
-        } catch {
-            fatalError(error.localizedDescription)
-        }
-    }
 }
 
 #Preview {
     SignInList()
-        .modelContainer(for: [Person.self])
 }
+
+//class UserProgress: ObservableObject {
+//    @Published var score = 0
+//}
+
+
+
+
+//@ObservedObject var progress: UserProgress
+//var body: some View {
+//    Button("Increase Score") {
+//        progress.score += 1
+//    }
+//}
+//}
+//
+//struct ContentPiew: View {
+//@StateObject var progress = UserProgress()
+//var body: some View {
+//    VStack {
+//        Text("Your scoer is \(progress.score)")
+//        SignInList(progress: progress)
+//    }
+//}

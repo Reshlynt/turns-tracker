@@ -11,23 +11,12 @@ import SwiftData
 @main
 struct turns_trackerApp: App {
     
-    // Attempt of ModelContainers
-    let mainContainer: ModelContainer
     
-    init() {
-        do {
-            let config1 = ModelConfiguration("database1", schema: Schema([Person.self]) )
-            
-            mainContainer = try ModelContainer(for: Person.self, configurations: config1)
-        } catch {
-            fatalError("Failed to configure SwiftData container.")
-        }
-    }
 
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(mainContainer)
+        .modelContainer(for: [Person.self])
     }
 }
