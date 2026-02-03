@@ -15,17 +15,19 @@ struct SignInList: View {
 
     // State variables
     @State private var showSignInForm = false
-    @State private var signedInPeople: [Person] = [Person(name: "Jonah")]
+    @State private var signedInPeople: [Person] = []
     
     var body: some View {
         List {
             ForEach(signedInPeople) { person in
                 HStack {
                     PersonQuickInfo(person: person)
+                    PersonTaskRow(taskRow: Taskrow())
                     
                 }
             }
         }
+        
     }
     
 }

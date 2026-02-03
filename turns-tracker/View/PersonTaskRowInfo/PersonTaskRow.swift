@@ -11,7 +11,7 @@ import SwiftUI
 
 struct PersonTaskRow: View {
     
-    @State var taskRow: [Task]
+    @ObservedObject var taskRow: Taskrow
     
     var body: some View {
         ZStack {
@@ -23,7 +23,7 @@ struct PersonTaskRow: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 20) {
-                    ForEach(taskRow, id: \.order) { task in
+                    ForEach(taskRow.taskList, id: \.order) { task in
                         VStack {
                             Image(task.imageName)
                                 .resizable()
@@ -58,5 +58,7 @@ struct PersonTaskRow: View {
         Task(title: "task 8", order: 7)
     ]
     
-    PersonTaskRow(taskRow: taskRowTest)
+    let t = Taskrow(taskList: taskRowTest)
+    
+    PersonTaskRow(taskRow: t)
 }

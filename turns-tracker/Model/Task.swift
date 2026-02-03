@@ -12,7 +12,7 @@
 import Foundation
 import SwiftData
 
-class Task: Identifiable, ObservableObject {
+class Task: Identifiable {
     var id: UUID = UUID()
     var title: String
     var order: Int
