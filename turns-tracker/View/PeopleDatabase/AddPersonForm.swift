@@ -36,11 +36,15 @@ struct AddPersonForm: View {
                     onAdd(newPerson)
                 }
                 .disabled(name.isEmpty)
+                .keyboardShortcut(.defaultAction)
                 
-                Button("Cancel") {
+                Button(role: .cancel) {
                     name = ""
                     onCancel()
+                } label: {
+                    Text("Cancel")
                 }
+                .keyboardShortcut(.cancelAction)
             }
         }
     }
