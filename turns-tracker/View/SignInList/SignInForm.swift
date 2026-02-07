@@ -27,30 +27,35 @@ struct SignInForm: View {
     var body: some View {
         VStack {
             Form {
-                TextField("Type PIN", text: $pin, prompt: Text("012345"))
-                HStack {
-                    Button("Confirm") {
-                        guard let person = checkPIN(pin: pin) else {
-                            showAlert = true
-                            return
+                VStack {
+                    Spacer()
+                    Text("Enter PIN below to sign in.")
+                        .font(.largeTitle)
+                    TextField("PIN", text: $pin, prompt: Text("012345"))
+                    HStack {
+                        Button("Confirm") {
+                            guard let person = checkPIN(pin: pin) else {
+                                showAlert = true
+                                return
+                            }
+                            onAdd(person)
                         }
-                        onAdd(person)
-                    }
 
-                    .alert("Invalid PIN", isPresented: $showAlert) {
-                        Button("OK", role: .cancel) { }
-                    }
-                    Button("Cancel") {
-                        //TODO: Create function to cancel operation
-                        pin = ""
-                        onCancel()
+                        .alert("Invalid PIN", isPresented: $showAlert) {
+                            Button("OK", role: .cancel) { }
+                        }
+                        Button("Cancel") {
+                            //TODO: Create function to cancel operation
+                            pin = ""
+                            onCancel()
+                        }
                     }
                 }
+               
             }
             
             
         }
-        .navigationTitle("Sign in")
     }
     
     // Finds the person with the corresponding PIN

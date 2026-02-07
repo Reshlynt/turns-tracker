@@ -9,11 +9,14 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-//    // Loads persistent data storage space
+    // Loads persistent data storage space
     @Environment(\.modelContext) var modelContext
     
     // Bindings
     @State private var visibility: NavigationSplitViewVisibility = .automatic
+    
+    // Persistent objects
+    @ObservedObject var signInVM: SignInViewModel
     
     var body: some View {
         
@@ -38,7 +41,7 @@ struct ContentView: View {
             case .peopleDatabase:
                 PeopleDatabase()
             case .signInList:
-                Text("ya mum")
+                SignInList(vm: signInVM)
             }
         }
 }
@@ -77,7 +80,8 @@ extension String {
 
 
 #Preview {
-    ContentView()
+    let vm = SignInViewModel()
+    ContentView(signInVM: vm)
         .modelContainer(for: [Person.self])
 }
 

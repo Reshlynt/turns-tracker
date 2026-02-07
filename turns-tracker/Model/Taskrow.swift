@@ -10,7 +10,7 @@
 import Foundation
 
 class Taskrow: ObservableObject {
-    @Published var taskList: [Task]
+    var taskList: [Task]
     
     init(taskList: [Task] = []) {
         self.taskList = taskList

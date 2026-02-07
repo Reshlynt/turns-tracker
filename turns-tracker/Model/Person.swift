@@ -11,40 +11,101 @@ import Foundation
 import SwiftData
 
 @Model
-class Person: Identifiable {
-    
-    private(set) var id: UUID
-    private var name: String
+final class Person: Identifiable {
+    @Attribute(.unique) var id: UUID
+
+    var name: String
     var pin: String
     var checkedIn: Bool
-    var payRate: Double
-    
-    // TODO: Figure out how to get a picture of a person onto this without putting the image into SwiftData
-    
-    init(name: String) {
-        self.id = UUID()
+    var payRate: Decimal   // prefer Decimal for monetary values
+
+    @Transient var taskRow: Taskrow = Taskrow(taskList: [])
+
+    // MARK: - Init
+    init(
+        id: UUID = UUID(),
+        name: String = "John",
+        pin: String? = nil,
+        checkedIn: Bool = false,
+        payRate: Decimal = 0.0,
+        taskRow: Taskrow = Taskrow(taskList: [])
+    ) {
+        self.id = id
         self.name = name
-        self.pin = Self.generatePinString()
-        self.checkedIn = false
-        self.payRate = 0.0
+        self.pin = pin ?? Self.generatePinString()
+        self.checkedIn = checkedIn
+        self.payRate = payRate
+        self.taskRow = taskRow
     }
-    
-    
-    // Getters
+
+    // MARK: - Getters
     func getName() -> String {
-        return self.name
+        name
     }
-    
-    // Setters
-    func SetName(name: String) -> Void {
-        self.name = name
+    func getPin() -> String {
+        pin
     }
-    
+    func isCheckedIn() -> Bool {
+        checkedIn
+    }
+    func getPayRate() -> Decimal {
+        payRate
+    }
+    func getTaskRow() -> Taskrow {
+        taskRow
+    }
+    // MARK: - Setters / mutating helpers
+    /// Set the name (trims whitespace)
+    func setName(_ newName: String) {
+        name = newName.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+    /// Set the PIN. Returns `true` if accepted, `false` otherwise.
+    /// Accepts exactly 6 digits only.
+    @discardableResult
+    func setPin(_ newPin: String) -> Bool {
+        let trimmed = newPin.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard trimmed.count == 6 && trimmed.allSatisfy({ $0.isNumber }) else {
+            return false
+        }
+        pin = trimmed
+        return true
+    }
+
+    /// Regenerate random 6-digit PIN.
+    func regeneratePin() {
+        pin = Self.generatePinString()
+    }
+
+    /// Check in / out helpers
+    func setCheckedIn(_ value: Bool) {
+        checkedIn = value
+    }
+
+    func checkIn() {
+        checkedIn = true
+    }
+
+    func checkOut() {
+        checkedIn = false
+    }
+
+    /// Set pay rate. Returns `true` if valid (non-negative), `false` otherwise.
+    @discardableResult
+    func setPayRate(_ newRate: Decimal) -> Bool {
+        guard newRate >= 0 else { return false }
+        payRate = newRate
+        return true
+    }
+
+    /// Replace the transient taskRow (UI-only)
+    func setTaskRow(_ newRow: Taskrow) {
+        taskRow = newRow
+    }
+
+    // MARK: - Helpers
+    /// Generates a 6 digin PIN
     static func generatePinString() -> String {
-        // Generates a random Int in 0...999_999 (one million possibilities),
-        // then formats it with leading zeros to always produce 6 characters.
         let n = Int.random(in: 0...999_999)
         return String(format: "%06d", n)
     }
-
 }

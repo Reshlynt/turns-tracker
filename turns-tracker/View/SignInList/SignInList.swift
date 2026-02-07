@@ -15,47 +15,54 @@ struct SignInList: View {
 
     // State variables
     @State private var showSignInForm = false
-    @State private var signedInPeople: [Person] = []
+    @ObservedObject var vm: SignInViewModel  // receives the instance
     
-    var body: some View {
-        List {
-            ForEach(signedInPeople) { person in
-                HStack {
-                    PersonQuickInfo(person: person)
-                    PersonTaskRow(taskRow: Taskrow())
-                    
+    // Test data
+    let p = Person(name: "Jeffery")
+
+        var body: some View {
+            List {
+                ForEach(vm.signedInPeople) { person in
+                    HStack {
+                        PersonQuickInfo(person: person)
+                        PersonTaskRow(taskRow: Taskrow())
+                    }
                 }
             }
+            .navigationTitle("Signed In")
+            .toolbar {
+                ToolbarItemGroup {
+                    Button {
+                        // TODO: Prompt the user to add a person via the sign in form.
+                        showSignInForm = true
+                    } label: {
+                        Label("Add", systemImage: "plus")
+                            .labelStyle(.titleAndIcon)
+                    }
+                    
+                    Button {
+                        // TODO: Prompt to remove
+                    } label: {
+                        Label("Remove All", systemImage: "trash")
+                            .labelStyle(.titleAndIcon)
+                    }
+
+                }
+            }
+            .sheet(isPresented: $showSignInForm) {
+                SignInForm { person in
+                    vm.add(person)
+                } onCancel: {
+                    showSignInForm = false
+                }
+
+            }
         }
-        
-    }
     
 }
 
 #Preview {
-    SignInList()
+    let vm = SignInViewModel()
+    
+    SignInList( vm: vm)
 }
-
-//class UserProgress: ObservableObject {
-//    @Published var score = 0
-//}
-
-
-
-
-//@ObservedObject var progress: UserProgress
-//var body: some View {
-//    Button("Increase Score") {
-//        progress.score += 1
-//    }
-//}
-//}
-//
-//struct ContentPiew: View {
-//@StateObject var progress = UserProgress()
-//var body: some View {
-//    VStack {
-//        Text("Your scoer is \(progress.score)")
-//        SignInList(progress: progress)
-//    }
-//}
