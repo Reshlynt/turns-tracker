@@ -18,8 +18,12 @@ struct PersonQuickInfo: View {
             // TODO: Figure out how to get an image of a person. Basically a profile picture. Currently it has only a placeholder of cat-meme but it needs to be replaced later.
             Image("cat-meme")
                 .resizable()
-                .frame(width: 50, height: 50)
-            Text(person.getName())
+                .scaledToFit()
+                .frame(width: 50)
+                .clipShape(RoundedRectangle(cornerRadius: 6))
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
+            Text(person.name)
         }
         .padding()
     }

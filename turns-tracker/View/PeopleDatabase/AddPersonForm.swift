@@ -4,46 +4,50 @@
 //
 //  Created by Scott Do on 11/4/25.
 //
+// A sheet View to take in user input and create a Person object to store into the database.
 // TODO: Take in user input. Allow them to confirm their choice. Save the result into SwiftData.
 
 import SwiftUI
 import SwiftData
 
 struct AddPersonForm: View {
-    @Environment(\.dismiss) private var dismiss
     
+    // State variables
     @State private var name = ""
     
+    // Function variables
     var onAdd: (Person) -> Void
     var onCancel: () -> Void
     
     var body: some View {
-            Form {
-                TextField("Name", text: $name)
-            }
-            .navigationTitle("New Person")
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Add") {
-                        let newPerson = Person(name: name)
-                        onAdd(newPerson)
-                        dismiss()
-                    }.disabled(name.isEmpty)
+        VStack {
+            Text("Enter name to register.")
+                .font(.largeTitle)
+            Text("A PIN will be automatically generated.")
+                .font(.caption)
+            TextField("Name", text: $name, prompt: Text("John Doe"))
+                .padding()
+        }
+        .toolbar {
+            ToolbarItemGroup {
+                Button("Add") {
+                    let newPerson = Person(name: name)
+                    name = ""
+                    onAdd(newPerson)
                 }
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        onCancel()
-                        dismiss()
-                    }
+                .disabled(name.isEmpty)
+                
+                Button("Cancel") {
+                    name = ""
+                    onCancel()
                 }
             }
+        }
     }
 }
 
 
+
 #Preview {
-    AddPersonForm(
-        onAdd: { _ in },
-        onCancel: { }
-    )
+    AddPersonForm(onAdd: { _ in } , onCancel: { } )
 }

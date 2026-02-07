@@ -9,8 +9,6 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    // Loads persistent data storage space
-    @Environment(\.modelContext) var modelContext
     
     // Bindings
     @State private var visibility: NavigationSplitViewVisibility = .automatic
@@ -82,6 +80,6 @@ extension String {
 #Preview {
     let vm = SignInViewModel()
     ContentView(signInVM: vm)
-        .modelContainer(for: [Person.self])
+        .modelContainer(for: [Person.self], inMemory: true)
 }
 

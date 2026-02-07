@@ -28,11 +28,13 @@ struct SignInForm: View {
         VStack {
             Form {
                 VStack {
-                    Spacer()
                     Text("Enter PIN below to sign in.")
                         .font(.largeTitle)
                     TextField("PIN", text: $pin, prompt: Text("012345"))
-                    HStack {
+                        .padding()
+                }
+                .toolbar {
+                    ToolbarItem {
                         Button("Confirm") {
                             guard let person = checkPIN(pin: pin) else {
                                 showAlert = true
@@ -40,10 +42,12 @@ struct SignInForm: View {
                             }
                             onAdd(person)
                         }
-
+                        
                         .alert("Invalid PIN", isPresented: $showAlert) {
                             Button("OK", role: .cancel) { }
                         }
+                    }
+                    ToolbarItem {
                         Button("Cancel") {
                             //TODO: Create function to cancel operation
                             pin = ""

@@ -16,9 +16,6 @@ struct SignInList: View {
     // State variables
     @State private var showSignInForm = false
     @ObservedObject var vm: SignInViewModel  // receives the instance
-    
-    // Test data
-    let p = Person(name: "Jeffery")
 
         var body: some View {
             List {

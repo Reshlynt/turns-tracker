@@ -17,8 +17,7 @@ struct turns_trackerApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView(signInVM: signInVM)
-                .modelContainer(for: [Person.self])
         }
-        
+        .modelContainer(for: [Person.self])
     }
 }

@@ -2,99 +2,125 @@
 //  PeopleDatabase.swift
 //  turns-tracker
 //
-//  Created by Scott Do on 10/28/25.
+//  Created on 10/28/25.
 //
+// Keeps a database of all people that have been registered into this platform.
 
 import SwiftUI
 import SwiftData
 
-// TODO: The intention of this view is to make a display of everyone that is currently in the database of people (in SwiftData), or workers in the sense. You must be able to add and remove people from this list. You must allow the showcase of their full information as kept in the database, including PIN.
-
 struct PeopleDatabase: View {
-    
-    // TODO: Be able to add and remove people from this database and save the result.
-    
-    @Environment(\.modelContext) var modelContext
-    @Environment(\.dismiss) private var dismiss
-    @Query var recordedPersons: [Person]
-    
-    // Status to store what people the user wants to delete.
-    @State private var personToDelete: Person?
+    @Environment(\.modelContext) private var modelContext
+    @Query private var recordedPersons: [Person]
     
     // Add-sheet to add in people
     @State private var showingAddSheet = false
+    
+    // Delete all state
+    @State private var deleteAllWarning = false
         
     var body: some View {
-        List {
-            ForEach(recordedPersons) { person in
-                HStack {
-                    Image("cat-meme")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 50)
-                        .clipShape(RoundedRectangle(cornerRadius: 6))
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 5)
-                    
-                    VStack {
-                        Text(person.getName())
-                            .font(.headline)
-                        Text("PIN: " + person.pin)
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
+        VStack {
+            List {
+                ForEach(recordedPersons) { person in
+                    HStack {
+                        Image("cat-meme")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 50)
+                            .clipShape(RoundedRectangle(cornerRadius: 6))
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 5)
+                        
+                        VStack {
+                            Text(person.name)
+                                .font(.headline)
+                            Text("PIN: " + person.pin)
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
+                        Spacer()
                     }
-                    Spacer()
-                }
-                // Two fingers on the touchpad to delete.
-                .swipeActions(edge: .trailing) {
-                    Button(role: .destructive) {
-                        delete(person)
-                    } label: {
-                        Label("Delete", systemImage: "trash")
+                    // Two fingers on the touchpad to delete.
+                    .swipeActions(edge: .trailing) {
+                        Button(role: .destructive) {
+                            deletePerson(person)
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
                     }
                 }
             }
-        }
-        //.navigationTitle("Recorded persons")
-        .toolbar {
-            ToolbarItem(placement: .primaryAction) {
-                Button(action: { showingAddSheet = true }) {
-                    Label("Add", systemImage: "plus")
+            .navigationTitle("Database of Recorded Persons")
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button(action: {showingAddSheet = true } ) {
+                        Label("Add", systemImage: "plus")
+                            .labelStyle(.titleAndIcon)
+                    }
+                }
+                ToolbarItem(placement: .automatic) {
+                    Button(action: { deleteAllWarning = true } ) {
+                        Label("Delete all", systemImage: "trash")
+                            .labelStyle(.titleAndIcon)
+                    }
                 }
             }
-        }
-        .alert(item: $personToDelete) { person in
-            Alert(
-                title: Text("Delete \"\(person.getName())\"?"),
-                message: Text("This will permantly delete this person and any local data associated with it."),
-                primaryButton: .destructive(Text("Delete")) {
-                    delete(person)
-                },
-                secondaryButton: .cancel()
-            )
-        }
-        .sheet(isPresented: $showingAddSheet) {
-            // Here, the arguments here are the FUNCTIONS for onAdd and onCancel.
-            AddPersonForm { newPerson in
-                modelContext.insert(newPerson)
-                showingAddSheet = false
-            } onCancel: {
-                showingAddSheet = false
+            .sheet(isPresented: $showingAddSheet) {
+                // TODO: Redo AddPersonForm.
+                AddPersonForm { person in
+                    addPerson(person)
+                    showingAddSheet = false
+                } onCancel: {
+                    showingAddSheet = false
+                }
+            }
+            .alert("Delete all registered persons?", isPresented: $deleteAllWarning) {
+                Button(role: .destructive) {
+                    do {
+                        try modelContext.delete(model: Person.self)
+                        try modelContext.save()
+                        deleteAllWarning = false
+                        print("Deletion success!")
+                    } catch {
+                        print("Error at batch deletion: ", error)
+                    }
+                } label: {
+                    Text("Delete All")
+                }
+                
+                Button(role: .cancel) {
+                    deleteAllWarning = false
+                } label: {
+                    Text("Cancel")
+                }
             }
         }
     }
     
+    // MARK: Helper functions
+    /// Given a Person, delete that object from the Model Data.
+    private func deletePerson(_ person: Person) {
+        do {
+            modelContext.delete(person)
+            try modelContext.save()
+        } catch {
+            print(error)
+        }
+    }
     
-    private func delete (_ person: Person) {
-        modelContext.delete(person)
+    /// Given a Person, add that object into the Model Data
+    private func addPerson(_ person: Person) {
+        do {
+            modelContext.insert(person)
+            try modelContext.save()
+        } catch {
+            print(error)
+        }
     }
 }
 
-
-
-// The line for adding things into the database is {modelContext}.insert(student)
-
 #Preview {
     PeopleDatabase()
-        .modelContainer(for: [Person.self])
+        .modelContainer(for: [Person.self], inMemory: true)
 }
