@@ -10,18 +10,27 @@
 // TODO: A TaskAssignment is a task is assigned to a Person. All Persons objects contain an array of TaskAssignments that denote what task they are supposed to do. This array would be the Taskrow
 
 import Foundation
-import SwiftData
+import SwiftUI
+import UniformTypeIdentifiers
 
-class Task: Identifiable {
+struct Task: Codable, Transferable {
+    
     var id: UUID = UUID()
     var title: String
     var order: Int
     var imageName: String
+    
+    static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation(contentType: .html)
+    }
     
     init(title: String, order: Int = 0, imageName: String = "cat-meme") {
         self.title = title
         self.order = order
         self.imageName = imageName
     }
-    
+}
+
+extension UTType {
+    static let developerTask = UTType(exportedAs: "com.scottdo.turns-tracker")
 }

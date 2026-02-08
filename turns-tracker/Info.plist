@@ -14,10 +14,11 @@
 			<key>UTTypeIcons</key>
 			<dict/>
 			<key>UTTypeIdentifier</key>
-			<string>com.scottdo.turns-tracker</string>
+			<string>com.reshlynt.turns-tracker</string>
 			<key>UTTypeTagSpecification</key>
 			<dict/>
 		</dict>
+		<dict/>
 	</array>
 </dict>
 </plist>
