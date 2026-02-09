@@ -47,15 +47,15 @@ struct PersonTaskRow: View {
 }
 
 #Preview {
-    let taskRowTest: [Task] = [
-        Task(title: "task 1", order: 0),
-        Task(title: "task 2", order: 1),
-        Task(title: "task 3", order: 2),
-        Task(title: "task 4", order: 3),
-        Task(title: "task 5", order: 4),
-        Task(title: "task 6", order: 5),
-        Task(title: "task 7", order: 6),
-        Task(title: "task 8", order: 7)
+    let taskRowTest: [TaskAssignment] = [
+        TaskAssignment(title: "task 1", order: 0),
+        TaskAssignment(title: "task 2", order: 1),
+        TaskAssignment(title: "task 3", order: 2),
+        TaskAssignment(title: "task 4", order: 3),
+        TaskAssignment(title: "task 5", order: 4),
+        TaskAssignment(title: "task 6", order: 5),
+        TaskAssignment(title: "task 7", order: 6),
+        TaskAssignment(title: "task 8", order: 7)
     ]
     
     let t = Taskrow(taskList: taskRowTest)

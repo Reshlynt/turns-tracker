@@ -10,15 +10,15 @@
 import Foundation
 
 class Taskrow: ObservableObject {
-    var taskList: [Task]
+    var taskList: [TaskAssignment]
     
-    init(taskList: [Task] = []) {
+    init(taskList: [TaskAssignment] = []) {
         self.taskList = taskList
     }
     
     
     // Setters
-    func addToTaskList(task: Task?) {
+    func addToTaskList(task: TaskAssignment?) {
         guard let taskToSend = task else { return }
         taskList.append(taskToSend)
     }
