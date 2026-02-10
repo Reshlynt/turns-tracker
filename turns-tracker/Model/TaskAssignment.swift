@@ -13,7 +13,7 @@ import Foundation
 import SwiftUI
 import UniformTypeIdentifiers
 
-struct TaskAssignment: Codable, Transferable {
+struct TaskAssignment: Codable, Identifiable, Transferable, Hashable {
     
     var id: UUID = UUID()
     var title: String
@@ -21,7 +21,7 @@ struct TaskAssignment: Codable, Transferable {
     var imageName: String
     
     static var transferRepresentation: some TransferRepresentation {
-        CodableRepresentation(contentType: .html)
+        CodableRepresentation(contentType: .developerTask)
     }
     
     init(title: String = "", order: Int = 0, imageName: String = "cat-meme") {
