@@ -20,7 +20,6 @@ struct TaskItem: View {
             
             Text(taskItem.title)
         }
-    }
 }
 
 #Preview {
