@@ -13,7 +13,6 @@ struct PersonTaskRow: View {
     
     @ObservedObject var taskRow: Taskrow
     
-    // tweak these values to control sizes and spacing
         let capsuleWidth: CGFloat = 55
         let capsuleHeight: CGFloat = 75
         let verticalInset: CGFloat = 10
@@ -30,21 +29,7 @@ struct PersonTaskRow: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 30) {
                     ForEach(taskRow.taskList, id: \.order) { task in
-                        VStack {
-                            Image(task.imageName)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: capsuleWidth * 0.7,
-                                       height: capsuleHeight * 0.5,
-                                       alignment: .top)
-                                .clipped()
-                            Text(task.title)
-                        }
-                        .background(
-                            Capsule()
-                                .fill(.blue)
-                                .frame(width: capsuleWidth, height: capsuleHeight)
-                        )
+                        TaskItem(taskItem: task)
                         .draggable(task)
                     }
                 }
