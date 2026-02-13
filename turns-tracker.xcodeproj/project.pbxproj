@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		1B95595F2F3E68A700EA75BB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1B95595E2F3E689F00EA75BB /* README.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		1B87CEEA2E5A0F5D000C31C3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,7 @@
 		1B87CED92E5A0F5C000C31C3 /* turns-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "turns-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B87CEE92E5A0F5D000C31C3 /* turns-trackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "turns-trackerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B87CEF32E5A0F5D000C31C3 /* turns-trackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "turns-trackerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B95595E2F3E689F00EA75BB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -88,6 +93,7 @@
 		1B87CED02E5A0F5B000C31C3 = {
 			isa = PBXGroup;
 			children = (
+				1B95595E2F3E689F00EA75BB /* README.md */,
 				1B87CEDB2E5A0F5C000C31C3 /* turns-tracker */,
 				1B87CEEC2E5A0F5D000C31C3 /* turns-trackerTests */,
 				1B87CEF62E5A0F5D000C31C3 /* turns-trackerUITests */,
@@ -225,6 +231,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B95595F2F3E68A700EA75BB /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

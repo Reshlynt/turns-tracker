@@ -28,9 +28,9 @@ struct PersonTaskRow: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 30) {
-                    ForEach(taskRow.taskList, id: \.order) { task in
+                    ForEach(taskRow.taskList) { task in
                         TaskItem(taskItem: task)
-                        .draggable(task)
+                            .draggable(task)
                     }
                 }
                 .padding(.horizontal, horizontalInset)
@@ -47,9 +47,9 @@ struct PersonTaskRow: View {
 
 #Preview {
     let taskRowTest: [TaskAssignment] = [
-        TaskAssignment(title: "task 1", order: 0),
-        TaskAssignment(title: "task 2", order: 1),
-        TaskAssignment(title: "task 3", order: 2)
+        TaskAssignment(title: "task 1"),
+        TaskAssignment(title: "task 2"),
+        TaskAssignment(title: "task 3")
 //        TaskAssignment(title: "task 4", order: 3),
 //        TaskAssignment(title: "task 5", order: 4),
 //        TaskAssignment(title: "task 6", order: 5),

@@ -7,9 +7,34 @@
 
 import SwiftUI
 
+
+
 struct TaskListing: View {
+    
+    // Layout variables
+    let layout = [
+        GridItem(.flexible(minimum: 40), spacing: spacing),
+        GridItem(.flexible(minimum: 40), spacing: spacing)
+    ]
+    static let spacing: CGFloat = 25
+    
+    // Test data
+    let taskListing: [TaskAssignment] = [
+        TaskAssignment(title: "do this"),
+        TaskAssignment(title: "do that"),
+        TaskAssignment(title: "maybe that"),
+        TaskAssignment(title: "also this")
+    ]
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            LazyVGrid(columns: layout, spacing: 15) {
+                ForEach(taskListing) { t in
+                    TaskItem(taskItem: t)
+                        .draggable(t)
+                }
+            }
+        }
     }
 }
 

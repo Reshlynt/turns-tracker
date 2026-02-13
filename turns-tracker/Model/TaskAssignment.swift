@@ -17,16 +17,14 @@ struct TaskAssignment: Codable, Identifiable, Transferable, Hashable {
     
     var id: UUID = UUID()
     var title: String
-    var order: Int
     var imageName: String
     
     static var transferRepresentation: some TransferRepresentation {
         CodableRepresentation(contentType: .developerTask)
     }
     
-    init(title: String = "", order: Int = 0, imageName: String = "cat-meme") {
+    init(title: String = "", imageName: String = "cat-meme") {
         self.title = title
-        self.order = order
         self.imageName = imageName
     }
 }

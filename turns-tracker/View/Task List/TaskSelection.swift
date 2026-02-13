@@ -11,14 +11,14 @@ struct TaskSelection: View {
     
     // Test data
     let taskRowTest: [TaskAssignment] = [
-        TaskAssignment(title: "task 1", order: 0),
-        TaskAssignment(title: "task 2", order: 1),
-        TaskAssignment(title: "task 3", order: 2),
-        TaskAssignment(title: "task 4", order: 3),
-        TaskAssignment(title: "task 5", order: 4),
-        TaskAssignment(title: "task 6", order: 5),
-        TaskAssignment(title: "task 7", order: 6),
-        TaskAssignment(title: "task 8", order: 7)
+        TaskAssignment(title: "task 1"),
+        TaskAssignment(title: "task 2"),
+        TaskAssignment(title: "task 3"),
+        TaskAssignment(title: "task 4"),
+        TaskAssignment(title: "task 5"),
+        TaskAssignment(title: "task 6"),
+        TaskAssignment(title: "task 7"),
+        TaskAssignment(title: "task 8")
     ]
     
     var body: some View {
