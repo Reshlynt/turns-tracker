@@ -39,7 +39,7 @@ struct ContentView: View {
             case .peopleDatabase:
                 PeopleDatabase()
             case .signInList:
-                SignInList(vm: signInVM)
+                SignInView(vm: signInVM)
             }
         }
 }
