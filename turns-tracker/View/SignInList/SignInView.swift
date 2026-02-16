@@ -28,8 +28,8 @@ struct SignInView: View {
 }
 
 #Preview {
-    
-    let vm = SignInViewModel()
+    let person = Person(name: "james")
+    let vm = SignInViewModel(initial: [person])
     
     SignInView(vm: vm)
 }

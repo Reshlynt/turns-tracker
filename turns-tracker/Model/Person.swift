@@ -38,4 +38,5 @@ class Person {
         let n = Int.random(in: 0...999_999)
         return String(format: "%06d", n)
     }
+    
 }

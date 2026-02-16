@@ -23,8 +23,6 @@ class Taskrow: ObservableObject {
         taskList.append(taskToSend)
     }
     
-    
-    
     // Helpers
     func eraseTaskList() {
         taskList.removeAll()
