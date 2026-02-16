@@ -11,7 +11,7 @@ import SwiftUI
 
 struct PersonTaskRow: View {
     
-    @ObservedObject var taskRow: Taskrow
+    @ObservedObject var taskRow: Taskrow = Taskrow()
     
         let capsuleWidth: CGFloat = 55
         let capsuleHeight: CGFloat = 75
@@ -22,10 +22,10 @@ struct PersonTaskRow: View {
         ZStack {
             RoundedRectangle(cornerRadius: 15)
                 .fill(Color.gray)
-                .frame(height: 80)
+                .frame(height: 90)
                 .opacity(0.5)
+                
 
-            
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 30) {
                     ForEach(taskRow.taskList) { task in
@@ -39,9 +39,16 @@ struct PersonTaskRow: View {
             .frame(height: capsuleHeight + verticalInset * 2)
             .clipShape(RoundedRectangle(cornerRadius: 15))
             .padding(.horizontal, 12)
+            .dropDestination(for: TaskAssignment.self) { dropped, _ in
+                print("dropped:", dropped.map { $0.title })
+                taskRow.taskList.append(contentsOf: dropped)
+                return true
+            }
         }
         .padding(.vertical)
         .padding(.horizontal)
+        
+        TaskListing()
     }
 }
 

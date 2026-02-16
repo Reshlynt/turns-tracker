@@ -22,7 +22,7 @@ struct SignInList: View {
                 ForEach(vm.signedInPeople) { person in
                     HStack {
                         PersonQuickInfo(person: person)
-                        PersonTaskRow(taskRow: Taskrow())
+                        PersonTaskRow(taskRow: person.taskList)
                     }
                 }
             }
@@ -38,7 +38,7 @@ struct SignInList: View {
                     }
                     
                     Button {
-                        // TODO: Prompt to remove
+                        vm.signedInPeople.removeAll()
                     } label: {
                         Label("Remove All", systemImage: "trash")
                             .labelStyle(.titleAndIcon)
@@ -49,6 +49,7 @@ struct SignInList: View {
             .sheet(isPresented: $showSignInForm) {
                 SignInForm { person in
                     vm.add(person)
+                    showSignInForm = false
                 } onCancel: {
                     showSignInForm = false
                 }

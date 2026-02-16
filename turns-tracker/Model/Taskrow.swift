@@ -9,18 +9,11 @@
 
 import Foundation
 
-class Taskrow: ObservableObject {
-    var taskList: [TaskAssignment]
+final class Taskrow: ObservableObject {
+    @Published var taskList: [TaskAssignment]
     
     init(taskList: [TaskAssignment] = []) {
         self.taskList = taskList
-    }
-    
-    
-    // Setters
-    func addToTaskList(task: TaskAssignment?) {
-        guard let taskToSend = task else { return }
-        taskList.append(taskToSend)
     }
     
     // Helpers

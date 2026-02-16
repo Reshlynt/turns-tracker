@@ -16,7 +16,7 @@ class Person {
     var checkedIn: Bool
     var payRate: Decimal
     @Transient
-    var taskList: Taskrow = Taskrow(taskList: [])
+    let taskList: Taskrow = Taskrow(taskList: [])
     
     init (
         name: String = "John",
@@ -29,7 +29,6 @@ class Person {
         self.pin = pin ?? Self.generatePinString()
         self.checkedIn = checkedIn
         self.payRate = 0.0
-        self.taskList = taskList ?? self.taskList
     }
     
     // MARK: - Helpers
