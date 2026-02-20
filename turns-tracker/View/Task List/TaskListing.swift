@@ -13,9 +13,14 @@ struct TaskListing: View {
     
     // Layout variables
     let layout = [
-        GridItem(.flexible(minimum: 40), spacing: spacing),
-        GridItem(.flexible(minimum: 40), spacing: spacing)
+        GridItem(.flexible(minimum: 40), spacing: Self.spacing),
+        GridItem(.flexible(minimum: 40), spacing: Self.spacing)
     ]
+
+    @State private var droppedTasks: [TaskAssignment] = []
+    @State private var isTargeted = false
+    @State private var isHovering = false
+
     static let spacing: CGFloat = 25
     
     // Test data
@@ -27,14 +32,17 @@ struct TaskListing: View {
     ]
     
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: layout, spacing: 15) {
-                ForEach(taskListing) { t in
-                    TaskItem(taskItem: t)
-                        .draggable(t)
+        HStack {
+            ScrollView {
+                LazyVGrid(columns: layout, spacing: 15) {
+                    ForEach(taskListing) { t in
+                        TaskItem(taskItem: t)
+                            .draggable(t)
+                    }
                 }
             }
         }
+        .frame(width: 500)
     }
 }
 

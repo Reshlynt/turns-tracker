@@ -9,27 +9,30 @@ import Foundation
 import SwiftData
 
 @Model
-class Person {
+final class Person: Identifiable, ObservableObject {
     @Attribute(.unique) var id = UUID()
     var name: String
     var pin: String
     var checkedIn: Bool
     var payRate: Decimal
     @Transient
-    let taskList: Taskrow = Taskrow(taskList: [])
+    @Published
+    var taskList: [TaskAssignment] = []
     
     init (
         name: String = "John",
         pin: String? = nil,
         checkedIn: Bool = false,
         payRate: Decimal = 0.0,
-        taskList: Taskrow? = nil
+        taskList: [TaskAssignment] = []
     ) {
         self.name = name
         self.pin = pin ?? Self.generatePinString()
         self.checkedIn = checkedIn
-        self.payRate = 0.0
+        self.payRate = payRate
+        self.taskList = taskList
     }
+
     
     // MARK: - Helpers
     /// Generates a 6 digin PIN

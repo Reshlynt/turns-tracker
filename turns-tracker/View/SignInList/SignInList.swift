@@ -22,7 +22,11 @@ struct SignInList: View {
                 ForEach(vm.signedInPeople) { person in
                     HStack {
                         PersonQuickInfo(person: person)
-                        PersonTaskRow(taskRow: person.taskList)
+                        PersonTaskRow(taskList: person.taskList)
+                            .dropDestination(for: TaskAssignment.self) { droppedTasks, location in
+                                person.taskList.append(contentsOf: droppedTasks)
+                                return true
+                            }
                     }
                 }
             }

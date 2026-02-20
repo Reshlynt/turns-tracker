@@ -14,7 +14,7 @@
 			<key>UTTypeIcons</key>
 			<dict/>
 			<key>UTTypeIdentifier</key>
-			<string>com.reshlynt.turns-tracker</string>
+			<string>com.scottdo.turns-tracker</string>
 			<key>UTTypeTagSpecification</key>
 			<dict/>
 		</dict>
