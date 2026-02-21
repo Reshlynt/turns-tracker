@@ -21,6 +21,7 @@ struct TaskAssignment: Codable, Identifiable, Transferable, Hashable {
     
     static var transferRepresentation: some TransferRepresentation {
         CodableRepresentation(contentType: .developerTask)
+        CodableRepresentation(contentType: .json)
     }
     
     init(title: String = "", imageName: String = "cat-meme") {

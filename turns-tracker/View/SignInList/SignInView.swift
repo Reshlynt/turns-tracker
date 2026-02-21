@@ -12,12 +12,11 @@ struct SignInView: View {
     let vm: SignInViewModel
     
     var body: some View {
-        NavigationSplitView {
+        HStack {
             SignInList(vm: vm)
                 .frame(minWidth: 220, idealWidth: 700)            // never collapse smaller than ~220
                 .frame(maxWidth: .infinity)      // allow expansion if window grows
                 .layoutPriority(2)
-        } detail: {
             TaskListing()
                 .frame(minWidth: 300) // prefer a wider task column
                 .frame(maxWidth: .infinity)

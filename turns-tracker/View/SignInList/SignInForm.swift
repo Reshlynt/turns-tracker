@@ -42,6 +42,8 @@ struct SignInForm: View {
                             }
                             onAdd(person)
                         }
+                        .disabled(pin.isEmpty)
+                        .keyboardShortcut(.defaultAction)
                         
                         .alert("Invalid PIN", isPresented: $showAlert) {
                             Button("OK", role: .cancel) { }

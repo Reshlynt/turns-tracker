@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct TaskItem: View {
-    let taskItem: TaskAssignment
+    var taskItem: TaskAssignment
 
     // Card dimensions (kept from your capsule example)
     let cardWidth: CGFloat = 55

@@ -42,7 +42,7 @@ struct TaskListing: View {
                 }
             }
         }
-        .frame(width: 500)
+        .frame(width: 200)
     }
 }
 
