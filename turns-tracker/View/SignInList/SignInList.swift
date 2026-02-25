@@ -19,14 +19,10 @@ struct SignInList: View {
 
         var body: some View {
             List {
-                ForEach(vm.signedInPeople) { person in
+                ForEach(vm.signedInPeople.indices, id: \.self) { index in
                     HStack {
-                        PersonQuickInfo(person: person)
-                        PersonTaskRow(taskList: person.taskList)
-                            .dropDestination(for: TaskAssignment.self) { droppedTasks, location in
-                                person.taskList.append(contentsOf: droppedTasks)
-                                return true
-                            }
+                        PersonQuickInfo(person: vm.signedInPeople[index])
+                        PersonTaskRow(taskList: $vm.signedInPeople[index].taskList)
                     }
                 }
             }

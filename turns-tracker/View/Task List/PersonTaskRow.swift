@@ -11,7 +11,7 @@ import SwiftUI
 
 struct PersonTaskRow: View {
     
-    @State var taskList: [TaskAssignment]
+    @Binding var taskList: [TaskAssignment]
     
     let capsuleWidth: CGFloat = 55
     let capsuleHeight: CGFloat = 75
@@ -42,11 +42,15 @@ struct PersonTaskRow: View {
         }
         .padding(.vertical)
         .padding(.horizontal)
+        .dropDestination(for: TaskAssignment.self) { droppedTasks, location in
+            taskList.append(contentsOf: droppedTasks)
+            return true
+        }
     }
 }
 
 #Preview {
-    let taskRowTest: [TaskAssignment] = [
+    @Previewable @State var taskRowTest: [TaskAssignment] = [
         TaskAssignment(title: "task 1"),
         TaskAssignment(title: "task 2"),
         TaskAssignment(title: "task 3")
@@ -56,7 +60,6 @@ struct PersonTaskRow: View {
 //        TaskAssignment(title: "task 7", order: 6),
 //        TaskAssignment(title: "task 8", order: 7)
     ]
-    
-    
-    PersonTaskRow(taskList: taskRowTest)
+
+    PersonTaskRow(taskList: $taskRowTest)
 }
