@@ -39,6 +39,12 @@ struct TaskListing: View {
             }
         }
         .frame(width: 200)
+        .contextMenu {
+            Button("Create a task") {
+                //TODO: Create task
+                
+            }
+        }
     }
     
     // MARK: - Helper Functions
