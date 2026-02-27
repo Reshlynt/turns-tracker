@@ -29,7 +29,9 @@ struct PersonTaskRow: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 30) {
                     ForEach(taskList) { task in
-                        TaskItem(taskItem: task)
+                        TaskItem(taskItem: task) {
+                            deleteTask(task)
+                        }
                             .draggable(task)
                     }
                 }
@@ -46,6 +48,11 @@ struct PersonTaskRow: View {
             taskList.append(contentsOf: droppedTasks)
             return true
         }
+    }
+    
+    // MARK: - Helper Functions
+    private func deleteTask(_ task: TaskAssignment) {
+        taskList.removeAll { $0.id == task.id }
     }
 }
 

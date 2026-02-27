@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct TaskItem: View {
+    
     var taskItem: TaskAssignment
+    var onDeletion: () -> Void
 
     // Card dimensions (kept from your capsule example)
     let cardWidth: CGFloat = 55
@@ -33,10 +35,16 @@ struct TaskItem: View {
         )
         .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
         .contentShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
+        .contextMenu {
+            Button("Delete task") {
+                //TODO: Delete this task
+                onDeletion()
+            }
+        }
     }
 }
 
 #Preview {
     let test = TaskAssignment(title: "task", imageName: "cat-meme")
-    TaskItem(taskItem: test)
+    TaskItem(taskItem: test, onDeletion: { } )
 }

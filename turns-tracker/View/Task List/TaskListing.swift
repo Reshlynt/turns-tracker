@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
-
-
+import SwiftData
 
 struct TaskListing: View {
+    
+    @Environment(\.modelContext) private var modelContext
+    @Query private var taskListing: [TaskAssignment]
     
     // Layout variables
     let layout = [
@@ -23,26 +25,26 @@ struct TaskListing: View {
 
     static let spacing: CGFloat = 25
     
-    // Test data
-    let taskListing: [TaskAssignment] = [
-        TaskAssignment(title: "do this"),
-        TaskAssignment(title: "do that"),
-        TaskAssignment(title: "maybe that"),
-        TaskAssignment(title: "also this")
-    ]
-    
     var body: some View {
         HStack {
             ScrollView {
                 LazyVGrid(columns: layout, spacing: 15) {
                     ForEach(taskListing) { t in
-                        TaskItem(taskItem: t)
-                            .draggable(t)
+                        TaskItem(taskItem: t) {
+                            deleteTask(t)
+                        }
+                        .draggable(t)
                     }
                 }
             }
         }
         .frame(width: 200)
+    }
+    
+    // MARK: - Helper Functions
+    private func deleteTask(_ task: TaskAssignment) {
+        modelContext.delete(task)
+        try? modelContext.save()
     }
 }
 
