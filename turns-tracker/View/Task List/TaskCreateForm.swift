@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import AppKit
 
 struct TaskCreateForm: View {
     
-    @State var taskName: String
+    @State var taskName: String = ""
+    @State private var selectImagePath: String = "cat-meme"
+    @State private var selectImageName: String = "cat-meme"
     
     // Callbacks
     var onAdd: (TaskAssignment) -> Void
@@ -18,10 +21,30 @@ struct TaskCreateForm: View {
     var body: some View {
         VStack {
             //TODO: Allow the user to pick a picture
+            if let nsImage = NSImage(contentsOfFile: selectImagePath) {
+                Image(nsImage: nsImage)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 150)
+                    .padding()
+                    .border(Color.gray, width: 1)
+            } else {
+                VStack {
+                    Image(selectImageName)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 150)
+                        .padding()
+                }
+                .border(Color.gray, width: 1)
+            }
+            
+            Button(action: pickImage) {
+                Label("Assign Image", systemImage: "photo")
+            }
             
             
-            
-            TextField("Name", text: $taskName, prompt: Text("my task"))
+            TextField("Name", text: $taskName, prompt: Text("Name your task"))
                 .padding()
         }
         .toolbar {
@@ -41,6 +64,38 @@ struct TaskCreateForm: View {
                     Text("Cancel")
                 }
                 .keyboardShortcut(.cancelAction)
+            }
+        }
+    }
+    
+    // MARK: -  Helper Functions
+    private func pickImage() {
+        let panel = NSOpenPanel()
+        panel.allowedContentTypes = [.image]
+        panel.allowsMultipleSelection = false
+        panel.canChooseFiles = true
+        panel.canChooseDirectories = false
+        
+        panel.begin { response in
+            if response == .OK, let url = panel.url {
+                // Copy the image to app's Documents folder
+                let fileManager = FileManager.default
+                let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                let fileName = url.lastPathComponent
+                let destinationURL = documentsURL.appendingPathComponent(fileName)
+                
+                do {
+                    // Remove existing file if it exists
+                    if fileManager.fileExists(atPath: destinationURL.path) {
+                        try fileManager.removeItem(at: destinationURL)
+                    }
+                    // Copy the new file
+                    try fileManager.copyItem(at: url, to: destinationURL)
+                    selectImagePath = destinationURL.path
+                    selectImageName = fileName
+                } catch {
+                    print("Error copying image: \(error)")
+                }
             }
         }
     }

@@ -22,6 +22,7 @@ struct TaskListing: View {
     @State private var droppedTasks: [TaskAssignment] = []
     @State private var isTargeted = false
     @State private var isHovering = false
+    @State private var showTaskFormSheet = false
 
     static let spacing: CGFloat = 25
     
@@ -41,9 +42,21 @@ struct TaskListing: View {
         .frame(width: 200)
         .contextMenu {
             Button("Create a task") {
-                //TODO: Create task
-                
+                showTaskFormSheet = true
             }
+        }
+        .sheet(isPresented: $showTaskFormSheet) {
+            TaskCreateForm { t in
+                modelContext.insert(t)
+                try? modelContext.save()
+                showTaskFormSheet = false
+            } onCancel: {
+                showTaskFormSheet = false
+            }
+        }
+        .background() {
+            RoundedRectangle(cornerRadius: 20)
+                .opacity(0.2)
         }
     }
     
