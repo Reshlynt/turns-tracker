@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import AppKit
 
 struct ContentView: View {
     
@@ -26,6 +27,15 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             
+            // Background Image
+            if !settings.backgroundImagePath.isEmpty,
+               let nsImage = NSImage(contentsOfFile: settings.backgroundImagePath) {
+                Image(nsImage: nsImage)
+                    .resizable()
+                    .scaledToFill()
+                    .ignoresSafeArea()
+                    .opacity(0.3) // Adjust opacity so text remains readable
+            }
             
             // Main Content
             NavigationSplitView(columnVisibility: $visibility) {
@@ -47,16 +57,6 @@ struct ContentView: View {
                 
             }
             .navigationSplitViewStyle(.balanced)
-            
-            // Background Image
-            if !settings.backgroundImagePath.isEmpty,
-               let nsImage = NSImage(contentsOfFile: settings.backgroundImagePath) {
-                Image(nsImage: nsImage)
-                    .resizable()
-                    .scaledToFill()
-                    .ignoresSafeArea()
-                    .opacity(0.3) // Adjust opacity so text remains readable
-            }
         }
     }
     
