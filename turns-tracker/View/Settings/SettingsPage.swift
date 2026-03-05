@@ -92,7 +92,7 @@ struct SettingsPage: View {
                 // Copy image to Documents folder
                 let fileManager = FileManager.default
                 let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
-                let fileName = "bg-" + UUID().uuidString + url.pathExtension.isEmpty ? "" : "." + url.pathExtension
+                let fileName = "bg-" + UUID().uuidString + (url.pathExtension.isEmpty ? "" : "." + url.pathExtension)
                 let destinationURL = documentsURL.appendingPathComponent(fileName)
                 
                 do {

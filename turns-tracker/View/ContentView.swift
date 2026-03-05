@@ -16,32 +16,59 @@ struct ContentView: View {
     // Persistent objects
     @ObservedObject var signInVM: SignInViewModel
     
+    // Settings
+    @Query private var settingsArray: [AppSettings]
+    
+    var settings: AppSettings {
+        settingsArray.first ?? AppSettings()
+    }
+    
     var body: some View {
-        
-        NavigationSplitView(columnVisibility: $visibility) {
-            List {
-                ForEach(NavigationCategory.allCases, id: \.self) { category in
+        ZStack {
+            
+            
+            // Main Content
+            NavigationSplitView(columnVisibility: $visibility) {
+                List {
+                    ForEach(NavigationCategory.allCases, id: \.self) { category in
+                        
+                        NavigationLink(destination: destinationView(for: category)) {
+                            Text(category.title)
+                        }
+                    }
                     
-                    NavigationLink(destination: destinationView(for: category)) {
-                        Text(category.title)
+                    Divider()
+                    
+                    NavigationLink(destination: SettingsPage()) {
+                        Label("Settings", systemImage: "gear")
                     }
                 }
+            } detail: {
+                
             }
-        } detail: {
+            .navigationSplitViewStyle(.balanced)
             
+            // Background Image
+            if !settings.backgroundImagePath.isEmpty,
+               let nsImage = NSImage(contentsOfFile: settings.backgroundImagePath) {
+                Image(nsImage: nsImage)
+                    .resizable()
+                    .scaledToFill()
+                    .ignoresSafeArea()
+                    .opacity(0.3) // Adjust opacity so text remains readable
+            }
         }
-        .navigationSplitViewStyle(.balanced)
     }
     
     @ViewBuilder
     private func destinationView(for category: NavigationCategory) -> some View {
-            switch category {
-            case .peopleDatabase:
-                PeopleDatabase()
-            case .signInList:
-                SignInView(vm: signInVM)
-            }
+        switch category {
+        case .peopleDatabase:
+            PeopleDatabase()
+        case .signInList:
+            SignInView(vm: signInVM)
         }
+    }
 }
 
 // Enumerables for category names
@@ -70,16 +97,13 @@ extension String {
         }
         return result
             .split(separator: " ")
-            .map { $0.capitalized }   // Capitalize each word (locale-aware enough for UI)
+            .map { $0.capitalized }
             .joined(separator: " ")
     }
 }
 
-
-
 #Preview {
     let vm = SignInViewModel()
     ContentView(signInVM: vm)
-        .modelContainer(for: [Person.self], inMemory: true)
+        .modelContainer(for: [Person.self, TaskAssignment.self, AppSettings.self], inMemory: true)
 }
-

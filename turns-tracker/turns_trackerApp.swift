@@ -18,6 +18,6 @@ struct turns_trackerApp: App {
         WindowGroup {
             ContentView(signInVM: signInVM)
         }
-        .modelContainer(for: [Person.self, TaskAssignment.self])
+        .modelContainer(for: [Person.self, TaskAssignment.self, AppSettings.self])
     }
 }

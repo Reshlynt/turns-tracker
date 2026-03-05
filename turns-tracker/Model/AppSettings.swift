@@ -6,3 +6,14 @@
 //
 
 import Foundation
+import SwiftData
+
+@Model
+final class AppSettings: Identifiable {
+    @Attribute(.unique) var id: String = "app-settings"
+    var backgroundImagePath: String = ""
+    
+    init(backgroundImagePath: String = "") {
+        self.backgroundImagePath = backgroundImagePath
+    }
+}
