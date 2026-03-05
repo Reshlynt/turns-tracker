@@ -19,10 +19,11 @@ struct SignInList: View {
 
         var body: some View {
             List {
-                ForEach(vm.signedInPeople.indices, id: \.self) { index in
+                ForEach(vm.signedInPeople.reversed().indices, id: \.self) { index in
+                    let reversedIndex = vm.signedInPeople.count - 1 - index
                     HStack {
-                        PersonQuickInfo(person: vm.signedInPeople[index])
-                        PersonTaskRow(taskList: $vm.signedInPeople[index].taskList)
+                        PersonQuickInfo(person: vm.signedInPeople[reversedIndex])
+                        PersonTaskRow(taskList: $vm.signedInPeople[reversedIndex].taskList)
                     }
                 }
             }
