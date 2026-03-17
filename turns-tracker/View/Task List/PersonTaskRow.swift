@@ -10,8 +10,9 @@
 import SwiftUI
 
 struct PersonTaskRow: View {
-    
+
     @Binding var taskList: [TaskAssignment]
+    @ObservedObject var vm: SignInViewModel
     
     let capsuleWidth: CGFloat = 55
     let capsuleHeight: CGFloat = 75
@@ -46,6 +47,7 @@ struct PersonTaskRow: View {
         .padding(.horizontal)
         .dropDestination(for: TaskAssignment.self) { droppedTasks, location in
             taskList.append(contentsOf: droppedTasks)
+            vm.updateNextAvailable()
             return true
         }
     }
@@ -67,6 +69,8 @@ struct PersonTaskRow: View {
 //        TaskAssignment(title: "task 7", order: 6),
 //        TaskAssignment(title: "task 8", order: 7)
     ]
+    
+    let vm = SignInViewModel()
 
-    PersonTaskRow(taskList: $taskRowTest)
+    PersonTaskRow(taskList: $taskRowTest, vm: vm)
 }

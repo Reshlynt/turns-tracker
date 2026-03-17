@@ -23,7 +23,7 @@ struct SignInList: View {
                     let reversedIndex = vm.signedInPeople.count - 1 - index
                     HStack {
                         PersonQuickInfo(person: vm.signedInPeople[reversedIndex])
-                        PersonTaskRow(taskList: $vm.signedInPeople[reversedIndex].taskList)
+                        PersonTaskRow(taskList: $vm.signedInPeople[reversedIndex].taskList, vm: vm)
                     }
                 }
             }

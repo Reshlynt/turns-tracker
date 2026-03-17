@@ -11,6 +11,7 @@ import Combine
 final class SignInViewModel: ObservableObject {
     
     @Published var signedInPeople: [Person] = []
+    @Published var nextAvailable: Person? = nil
 
     init(initial: [Person] = []) {
         self.signedInPeople = initial
@@ -29,5 +30,23 @@ final class SignInViewModel: ObservableObject {
     // Replace full contents
     func setAll(_ people: [Person]) {
         signedInPeople = people
+    }
+    
+    // MARK: - Helper Functions
+    func nextAvailablePerson() -> Person? {
+        guard !signedInPeople.isEmpty else { return nil }
+        
+        return signedInPeople.min { person1, person2 in
+            if person1.taskList.count == person2.taskList.count {
+                return signedInPeople.firstIndex(of: person1) ?? 0 < signedInPeople.firstIndex(of: person2) ?? 0
+            }
+            
+            return person1.taskList.count < person2.taskList.count
+        }
+    }
+    
+    func updateNextAvailable() {
+        self.nextAvailable = nextAvailablePerson()
+        print("gotten into this function in SignInViewModel")
     }
 }
