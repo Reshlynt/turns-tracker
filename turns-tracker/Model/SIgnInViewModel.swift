@@ -47,6 +47,5 @@ final class SignInViewModel: ObservableObject {
     
     func updateNextAvailable() {
         self.nextAvailable = nextAvailablePerson()
-        print("gotten into this function in SignInViewModel")
     }
 }

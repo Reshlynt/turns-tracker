@@ -23,8 +23,18 @@ struct SignInList: View {
                     let reversedIndex = vm.signedInPeople.count - 1 - index
                     HStack {
                         PersonQuickInfo(person: vm.signedInPeople[reversedIndex])
-                        PersonTaskRow(taskList: $vm.signedInPeople[reversedIndex].taskList, vm: vm)
+                        
+                        // What about if this finds the person?
+                        
+                        if vm.signedInPeople[reversedIndex] == vm.nextAvailable {
+                            PersonTaskRow(taskList: $vm.signedInPeople[reversedIndex].taskList, vm: vm, colorChangeOnAvailable: true)
+                        } else {
+                            PersonTaskRow(taskList: $vm.signedInPeople[reversedIndex].taskList, vm: vm, colorChangeOnAvailable: false)
+                        }
+                        
+                        
                     }
+                    
                 }
             }
             .navigationTitle("Signed In")

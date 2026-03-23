@@ -5,15 +5,21 @@
 //  Created by Scott Do on 10/9/25.
 //
 
-// TODO: This struct showcases all tasks on the task row. This should be interactable in that the user can drag task into and out of this row. 
+// TODO: Whwn there is a new task update, find the new person who is available. If they are availale, create a visual indicator for it.
+
+// It goes something like this:
+// A task is put into the taskbar. That is the DropDestination action in this code. Then an algorithm is automatically triggered to find the next available person for work. An alert of some kind is triggered for a color change to allow the user to easily identify who can work. Once another task is dragged in, the process repeats.
 
 import SwiftUI
 
 struct PersonTaskRow: View {
 
+    // Bindings
     @Binding var taskList: [TaskAssignment]
     @ObservedObject var vm: SignInViewModel
+    @State var colorChangeOnAvailable: Bool
     
+    // Task capsule information
     let capsuleWidth: CGFloat = 55
     let capsuleHeight: CGFloat = 75
     let verticalInset: CGFloat = 10
@@ -22,7 +28,7 @@ struct PersonTaskRow: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 15)
-                .fill(Color.gray)
+                .fill(colorChangeOnAvailable ? Color.blue : Color.gray)
                 .frame(height: 90)
                 .opacity(0.5)
                 
@@ -72,5 +78,5 @@ struct PersonTaskRow: View {
     
     let vm = SignInViewModel()
 
-    PersonTaskRow(taskList: $taskRowTest, vm: vm)
+    PersonTaskRow(taskList: $taskRowTest, vm: vm, colorChangeOnAvailable: false)
 }
