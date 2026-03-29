@@ -27,16 +27,6 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             
-//            // Background Image
-//            if !settings.backgroundImagePath.isEmpty,
-//               let nsImage = NSImage(contentsOfFile: settings.backgroundImagePath) {
-//                Image(nsImage: nsImage)
-//                    .resizable()
-//                    .scaledToFill()
-//                    .ignoresSafeArea()
-//                    .opacity(0.3) // Adjust opacity so text remains readable
-//            }
-            
             // Main Content
             NavigationSplitView(columnVisibility: $visibility) {
                 List {
@@ -49,7 +39,9 @@ struct ContentView: View {
                     
                     Divider()
                     
-                    NavigationLink(destination: SettingsPage()) {
+                    NavigationLink {
+                        SettingsPage()
+                    } label: {
                         Label("Settings", systemImage: "gear")
                     }
                 }
