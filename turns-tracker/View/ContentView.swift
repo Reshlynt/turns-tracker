@@ -27,6 +27,8 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             
+
+            
             // Main Content
             NavigationSplitView(columnVisibility: $visibility) {
                 List {
@@ -50,14 +52,16 @@ struct ContentView: View {
             }
             .navigationSplitViewStyle(.balanced)
             .background {
-                if !settings.backgroundImagePath.isEmpty,
-                   let nsImage = NSImage(contentsOfFile: settings.backgroundImagePath) {
-                    Image(nsImage: nsImage)
-                        .resizable()
-                        .scaledToFill()
-                        .ignoresSafeArea()
-                        .opacity(0.3) // Adjust opacity so text remains readable
-                }
+//                if !settings.backgroundImagePath.isEmpty,
+//                   let nsImage = NSImage(contentsOfFile: settings.backgroundImagePath) {
+//                    Image(nsImage: nsImage)
+//                        .resizable()
+//                        .scaledToFill()
+//                        .ignoresSafeArea()
+//                        .opacity(0.3) // Adjust opacity so text remains readable
+//                }
+                
+                Image("cat-meme")
             }
         }
     }

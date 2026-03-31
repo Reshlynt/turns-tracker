@@ -13,7 +13,7 @@ final class AppSettings: Identifiable {
     @Attribute(.unique) var id: String = "app-settings"
     var backgroundImagePath: String = ""
     
-    init(backgroundImagePath: String = "") {
+    init(backgroundImagePath: String = "cat-meme") {
         self.backgroundImagePath = backgroundImagePath
     }
 }

@@ -96,6 +96,7 @@ struct PeopleDatabase: View {
                 }
             }
         }
+        
     }
     
     // MARK: Helper functions
