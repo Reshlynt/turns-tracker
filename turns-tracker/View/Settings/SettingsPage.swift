@@ -24,11 +24,13 @@ struct SettingsPage: View {
     
     var body: some View {
         VStack {
-            PhotosPicker("Select image", selection: $avatarItem, matching: .images)
-            avatarImage?
-                .resizable()
-                .scaledToFit()
-                .frame(width: 300, height: 300)
+            List {
+                PhotosPicker("Select image", selection: $avatarItem, matching: .images)
+                avatarImage?
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 300, height: 300)
+            }
         }
         .onChange(of: avatarItem) {
             Task {

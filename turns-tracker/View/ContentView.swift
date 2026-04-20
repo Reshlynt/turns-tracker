@@ -41,26 +41,12 @@ struct ContentView: View {
                     
                     Divider()
                     
-                    NavigationLink {
-                        SettingsPage()
-                    } label: {
-                        Label("Settings", systemImage: "gear")
-                    }
                 }
             } detail: {
                 
             }
             .navigationSplitViewStyle(.balanced)
             .background {
-//                if !settings.backgroundImagePath.isEmpty,
-//                   let nsImage = NSImage(contentsOfFile: settings.backgroundImagePath) {
-//                    Image(nsImage: nsImage)
-//                        .resizable()
-//                        .scaledToFill()
-//                        .ignoresSafeArea()
-//                        .opacity(0.3) // Adjust opacity so text remains readable
-//                }
-                
                 Image("cat-meme")
             }
         }

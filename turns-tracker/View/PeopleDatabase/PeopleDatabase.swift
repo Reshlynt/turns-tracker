@@ -41,6 +41,10 @@ struct PeopleDatabase: View {
                         }
                         Spacer()
                     }
+                    .background {
+                        RoundedRectangle(cornerRadius: 20.0)
+                            .opacity(0.30)
+                    }
                     // Two fingers on the touchpad to delete.
                     .swipeActions(edge: .trailing) {
                         Button(role: .destructive) {

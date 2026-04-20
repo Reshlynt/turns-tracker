@@ -19,5 +19,11 @@ struct turns_trackerApp: App {
             ContentView(signInVM: signInVM)
         }
         .modelContainer(for: [Person.self, TaskAssignment.self, AppSettings.self])
+        
+        #if os(macOS)
+        Settings {
+            SettingsPage()
+        }
+        #endif
     }
 }
