@@ -10,40 +10,27 @@ import SwiftData
 import AppKit
 
 struct ContentView: View {
-    
-    // Bindings
     @State private var visibility: NavigationSplitViewVisibility = .automatic
-    
-    // Persistent objects
     @ObservedObject var signInVM: SignInViewModel
-    
-    // Settings
     @Query private var settingsArray: [AppSettings]
-    
+
     var settings: AppSettings {
         settingsArray.first ?? AppSettings()
     }
-    
+
     var body: some View {
         ZStack {
-            
-
-            
-            // Main Content
             NavigationSplitView(columnVisibility: $visibility) {
                 List {
                     ForEach(NavigationCategory.allCases, id: \.self) { category in
-                        
                         NavigationLink(destination: destinationView(for: category)) {
                             Text(category.title)
                         }
                     }
-                    
+
                     Divider()
-                    
                 }
             } detail: {
-                
             }
             .navigationSplitViewStyle(.balanced)
             .background {
@@ -51,7 +38,7 @@ struct ContentView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private func destinationView(for category: NavigationCategory) -> some View {
         switch category {
@@ -63,18 +50,15 @@ struct ContentView: View {
     }
 }
 
-// Enumerables for category names
-// All names are under camel case syntax
 enum NavigationCategory: String, CaseIterable {
     case peopleDatabase
     case signInList
-    
+
     var title: String {
         rawValue.camelCaseToTitle
     }
 }
 
-// String function extension to allocate for the category naming
 extension String {
     /// Inserts spaces before uppercase letters and capitalizes each word.
     /// Examples: "peopleDatabase" -> "People Database", "signInList" -> "Sign In List"

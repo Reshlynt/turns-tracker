@@ -15,32 +15,21 @@ struct SettingsPage: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var settingsArray: [AppSettings]
     
-    @State private var avatarItem: PhotosPickerItem?
-    @State private var avatarImage: Image?
-    
     var settings: AppSettings {
         settingsArray.first ?? AppSettings()
     }
     
     var body: some View {
-        VStack {
+        NavigationSplitView {
             List {
-                PhotosPicker("Select image", selection: $avatarItem, matching: .images)
-                avatarImage?
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 300, height: 300)
-            }
-        }
-        .onChange(of: avatarItem) {
-            Task {
-                if let loaded = try? await avatarItem?.loadTransferable(type: Image.self) {
-                    avatarImage = loaded
-                } else {
-                    print("Failed operation")
+                NavigationLink(destination: BackgroundPicker()) {
+                    Label("Background", systemImage: "photo")
                 }
             }
+        } detail: {
+            
         }
+
     }
 }
 
