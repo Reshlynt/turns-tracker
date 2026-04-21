@@ -14,24 +14,14 @@ struct BackgroundPicker: View {
     @State private var backgroundPhoto: PhotosPickerItem?
     @State private var selectedPhotoData: Data?
     
-    private var previewImage: Image? {
-            guard
-                let selectedPhotoData,
-                let nsImage = NSImage(data: selectedPhotoData)
-            else {
-                return nil
-            }
-
-            return Image(nsImage: nsImage)
-        }
-
+    var onChooseBackground: (Data?) -> Void
     
     var body: some View {
         VStack {
             
             Section {
-                if let previewImage {
-                    previewImage
+                if let testPic = DataToImageConverter.convertDataToImage(photoData: selectedPhotoData){
+                    testPic
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: 300, maxHeight: 200)
@@ -53,6 +43,12 @@ struct BackgroundPicker: View {
                         Label("Remove Image", systemImage: "xmark")
                             .foregroundStyle(.red)
                     }
+                    
+                    Button {
+                        onChooseBackground(selectedPhotoData)
+                    } label: {
+                        Label("Confirm Image", systemImage: "checkmark")
+                    }
                 }
             }
             .task(id: backgroundPhoto) {
@@ -60,12 +56,24 @@ struct BackgroundPicker: View {
                     selectedPhotoData = data
                 }
             }
-            
-            
         }
     }
+    
+//    private func convertDataToImage(_: Data?) -> Image? {
+//        guard
+//            let selectedPhotoData,
+//            let nsImage = NSImage(data: selectedPhotoData)
+//        else {
+//            return nil
+//        }
+//
+//        return Image(nsImage: nsImage)
+//    }
 }
 
 #Preview {
-    BackgroundPicker()
+    BackgroundPicker(onChooseBackground: {_ in 
+        
+    }
+    )
 }

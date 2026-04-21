@@ -16,13 +16,23 @@ struct SettingsPage: View {
     @Query private var settingsArray: [AppSettings]
     
     var settings: AppSettings {
-        settingsArray.first ?? AppSettings()
+        if let existing = settingsArray.first {
+            return existing
+        } else {
+            let newSettings = AppSettings()
+            modelContext.insert(newSettings)
+            return newSettings
+        }
     }
     
     var body: some View {
         if #available(macOS 15.0, *) {
+
             TabView {
-                BackgroundPicker()
+                BackgroundPicker() { photoData in
+                    settings.image = photoData
+                    saveAppSettings()
+                }
                     .tabItem {
                         Label("Background", systemImage: "photo.fill")
                     }
@@ -32,7 +42,17 @@ struct SettingsPage: View {
         } else {
             // Fallback on earlier versions
         }
+        
 
+    }
+    
+    private func saveAppSettings() {
+        do {
+            try modelContext.save()
+            print("Save successful")
+        } catch {
+            print(error)
+        }
     }
 }
 
