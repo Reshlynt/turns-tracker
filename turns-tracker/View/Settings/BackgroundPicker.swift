@@ -29,18 +29,30 @@ struct BackgroundPicker: View {
     var body: some View {
         VStack {
             
-            if let previewImage {
-                previewImage
-                    .resizable()
-                    .scaledToFit()
-                    .frame(maxWidth: 300, maxHeight: 200)
-            }
-            
             Section {
+                if let previewImage {
+                    previewImage
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: 300, maxHeight: 200)
+                }
+                
                 PhotosPicker(selection: $backgroundPhoto,
                              matching: .images,
                              photoLibrary: .shared()) {
                     Label("Add Image", systemImage: "photo")
+                }
+                
+                if selectedPhotoData != nil {
+                    Button(role: .destructive) {
+                        withAnimation {
+                            backgroundPhoto = nil
+                            selectedPhotoData = nil
+                        }
+                    } label: {
+                        Label("Remove Image", systemImage: "xmark")
+                            .foregroundStyle(.red)
+                    }
                 }
             }
             .task(id: backgroundPhoto) {

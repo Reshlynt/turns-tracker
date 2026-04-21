@@ -20,14 +20,17 @@ struct SettingsPage: View {
     }
     
     var body: some View {
-        NavigationSplitView {
-            List {
-                NavigationLink(destination: BackgroundPicker()) {
-                    Label("Background", systemImage: "photo")
-                }
+        if #available(macOS 15.0, *) {
+            TabView {
+                BackgroundPicker()
+                    .tabItem {
+                        Label("Background", systemImage: "photo.fill")
+                    }
+
             }
-        } detail: {
-            
+            .frame(minWidth: 500, minHeight: 600)
+        } else {
+            // Fallback on earlier versions
         }
 
     }
