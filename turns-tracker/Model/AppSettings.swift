@@ -11,12 +11,11 @@ import SwiftData
 @Model
 final class AppSettings: Identifiable {
     @Attribute(.unique) var id: String = "app-settings"
-    var backgroundImagePath: String = ""
     
     @Attribute(.externalStorage)
     var image: Data?
     
     init(){
-        
+        image.self = nil
     }
 }

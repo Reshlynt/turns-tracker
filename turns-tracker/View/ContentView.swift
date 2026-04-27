@@ -10,14 +10,12 @@ import SwiftData
 import AppKit
 
 struct ContentView: View {
+    @Environment(\.modelContext) private var modelContext
     @State private var visibility: NavigationSplitViewVisibility = .automatic
     @ObservedObject var signInVM: SignInViewModel
-    @Query private var settingsArray: [AppSettings]
-
-    var settings: AppSettings {
-        settingsArray.first ?? AppSettings()
-    }
-
+    
+    
+    
     var body: some View {
         ZStack {
             NavigationSplitView(columnVisibility: $visibility) {
@@ -34,7 +32,7 @@ struct ContentView: View {
             }
             .navigationSplitViewStyle(.balanced)
             .background {
-                Image("cat-meme")
+                
             }
         }
     }

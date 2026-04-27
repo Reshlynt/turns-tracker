@@ -12,11 +12,12 @@ import SwiftData
 struct turns_trackerApp: App {
     
     // Keeps a consistent sign in view model
-    @StateObject private var signInVM = SignInViewModel()
-
+    
+    
+    
     var body: some Scene {
         WindowGroup {
-            ContentView(signInVM: signInVM)
+            RootView()
         }
         .modelContainer(for: [Person.self, TaskAssignment.self, AppSettings.self])
         
