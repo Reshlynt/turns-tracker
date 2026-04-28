@@ -35,15 +35,17 @@ struct PeopleDatabase: View {
                         VStack {
                             Text(person.name)
                                 .font(.headline)
+                                .foregroundStyle(.blue)
                             Text("PIN: " + person.pin)
                                 .font(.subheadline)
                                 .foregroundStyle(.secondary)
+                                .foregroundStyle(.black)
                         }
                         Spacer()
                     }
                     .background {
                         RoundedRectangle(cornerRadius: 20.0)
-                            .opacity(0.30)
+                            .opacity(0.80)
                     }
                     // Two fingers on the touchpad to delete.
                     .swipeActions(edge: .trailing) {

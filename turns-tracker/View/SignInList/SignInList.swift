@@ -61,6 +61,10 @@ struct SignInList: View {
                 SignInForm { person in
                     vm.add(person)
                     showSignInForm = false
+                    // If there is exactly one person, this implies that this is the first person to sign in, and thus they already have priority.
+                    if vm.signedInPeople.count == 1 {
+                        vm.updateNextAvailable()
+                    }
                 } onCancel: {
                     showSignInForm = false
                 }

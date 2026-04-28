@@ -20,6 +20,7 @@ final class SignInViewModel: ObservableObject {
     // Add a person to the list
     func add(_ person: Person) {
         signedInPeople.append(person)
+        
     }
 
     // Remove a person by id
@@ -45,7 +46,14 @@ final class SignInViewModel: ObservableObject {
         }
     }
     
+    // Updates the nxt available person on a person sign in list.
     func updateNextAvailable() {
         self.nextAvailable = nextAvailablePerson()
+    }
+    
+    // Updates the pay that someone gets from task completion.
+    // I could work with the logic that I can
+    func updateWage(money: Decimal){
+        
     }
 }

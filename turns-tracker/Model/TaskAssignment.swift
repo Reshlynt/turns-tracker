@@ -20,14 +20,16 @@ final class TaskAssignment: Identifiable, Transferable, Hashable, Sendable, Coda
     @Attribute(.unique) var id: UUID = UUID()
     var title: String
     var imageName: String
+    var pricing: Decimal
     
     static var transferRepresentation: some TransferRepresentation {
         CodableRepresentation(contentType: .json)
     }
     
-    init(title: String = "", imageName: String = "cat-meme") {
+    init(title: String = "", imageName: String = "cat-meme", pricing: Decimal = 0.0) {
         self.title = title
         self.imageName = imageName
+        self.pricing = 0.0
     }
     
     // MARK: - Codable Conformance
@@ -35,6 +37,7 @@ final class TaskAssignment: Identifiable, Transferable, Hashable, Sendable, Coda
         case id
         case title
         case imageName
+        case pricing
     }
     
     required init(from decoder: Decoder) throws {
@@ -42,6 +45,7 @@ final class TaskAssignment: Identifiable, Transferable, Hashable, Sendable, Coda
         self.id = try container.decode(UUID.self, forKey: .id)
         self.title = try container.decode(String.self, forKey: .title)
         self.imageName = try container.decode(String.self, forKey: .imageName)
+        self.pricing = try container.decode(Decimal.self, forKey: .pricing)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -49,6 +53,7 @@ final class TaskAssignment: Identifiable, Transferable, Hashable, Sendable, Coda
         try container.encode(id, forKey: .id)
         try container.encode(title, forKey: .title)
         try container.encode(imageName, forKey: .imageName)
+        try container.encode(pricing, forKey: .pricing)
     }
     
     func hash(into hasher: inout Hasher) {
