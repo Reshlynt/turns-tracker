@@ -53,6 +53,7 @@ struct PersonTaskRow: View {
         .padding(.horizontal)
         .dropDestination(for: TaskAssignment.self) { droppedTasks, location in
             taskList.append(contentsOf: droppedTasks)
+            vm.updateWage(money: droppedTasks.first?.pricing)
             vm.updateNextAvailable()
             return true
         }

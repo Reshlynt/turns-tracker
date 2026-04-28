@@ -53,7 +53,7 @@ final class SignInViewModel: ObservableObject {
     
     // Updates the pay that someone gets from task completion.
     // I could work with the logic that I can
-    func updateWage(money: Decimal){
-        
+    func updateWage(money: Decimal?){
+        self.nextAvailable?.payRate += money!
     }
 }
