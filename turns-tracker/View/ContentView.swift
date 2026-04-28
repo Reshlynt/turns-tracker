@@ -14,7 +14,10 @@ struct ContentView: View {
     @State private var visibility: NavigationSplitViewVisibility = .automatic
     @ObservedObject var signInVM: SignInViewModel
     
-    
+    @Query private var settingsArray: [AppSettings]
+    private var settings: AppSettings {
+        settingsArray.first!
+    }
     
     var body: some View {
         ZStack {
@@ -32,7 +35,11 @@ struct ContentView: View {
             }
             .navigationSplitViewStyle(.balanced)
             .background {
-                
+                if let testPic = DataToImageConverter.convertDataToImage(photoData: settings.image){
+                    testPic
+                        .resizable()
+                        .scaledToFit()
+                }
             }
         }
     }
