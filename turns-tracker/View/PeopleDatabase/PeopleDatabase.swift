@@ -23,26 +23,30 @@ struct PeopleDatabase: View {
         VStack {
             List {
                 ForEach(recordedPersons) { person in
-                    HStack {
-                        Image("cat-meme")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 50)
-                            .clipShape(RoundedRectangle(cornerRadius: 6))
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 5)
-                        
-                        VStack {
-                            Text(person.name)
-                                .font(.headline)
-                                .foregroundStyle(.blue)
-                            Text("PIN: " + person.pin)
-                                .font(.subheadline)
-                                .foregroundStyle(.secondary)
-                                .foregroundStyle(.black)
-                        }
-                        Spacer()
-                    }
+//                    HStack {
+//                        Image("cat-meme")
+//                            .resizable()
+//                            .scaledToFit()
+//                            .frame(width: 50)
+//                            .clipShape(RoundedRectangle(cornerRadius: 6))
+//                            .padding(.horizontal, 10)
+//                            .padding(.vertical, 5)
+//                        
+//                        VStack {
+//                            Text(person.name)
+//                                .font(.headline)
+//                                .foregroundStyle(.blue)
+//                            Text("PIN: " + person.pin)
+//                                .font(.subheadline)
+//                                .foregroundStyle(.secondary)
+//                                .foregroundStyle(.black)
+//                        }
+//                        
+//                        Text("Pay: ", person.payRate)
+//                            .foregroundStyle(.black)
+//                        Spacer()
+//                    }
+                    PersonDatabaseInfo(person: person)
                     .background {
                         RoundedRectangle(cornerRadius: 20.0)
                             .opacity(0.80)
