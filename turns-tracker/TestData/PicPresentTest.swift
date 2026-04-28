@@ -25,12 +25,14 @@ struct PicPresentTest: View {
     
     
     var body: some View {
-        Text("hello world")
-        if let testPic = DataToImageConverter.convertDataToImage(photoData: settings.image) {
-            testPic
-                .resizable()
-                .scaledToFit()
-                .frame(maxWidth: 300, maxHeight: 200)
+        VStack {
+            Text("hello world")
+            if let testPic = DataToImageConverter.convertDataToImage(photoData: settings.image) {
+                testPic
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: 300, maxHeight: 200)
+            }
         }
     }
 }

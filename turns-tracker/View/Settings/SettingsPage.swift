@@ -13,14 +13,13 @@ import SwiftData
 
 struct SettingsPage: View {
     @Environment(\.modelContext) private var modelContext
-    @Query(filter: #Predicate<AppSettings> { $0.id == "app-settings" })
-    private var settingsArray: [AppSettings]
+    @Query private var settingsArray: [AppSettings]
     
     var settings: AppSettings {
-        settingsArray[0]
+        settingsArray.first!
     }
     
-    
+
     var body: some View {
         if #available(macOS 15.0, *) {
 
@@ -41,13 +40,6 @@ struct SettingsPage: View {
             .frame(minWidth: 500, minHeight: 600)
         } else {
             // Fallback on earlier versions
-        }
-        
-        if let testPic = DataToImageConverter.convertDataToImage(photoData: settings.image) {
-            testPic
-                .resizable()
-                .scaledToFit()
-                .frame(maxWidth: 300, maxHeight: 200)
         }
 
     }

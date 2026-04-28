@@ -15,7 +15,7 @@ final class AppSettings: Identifiable {
     @Attribute(.externalStorage)
     var image: Data?
     
-    init(){
-        image.self = nil
+    init(backgroundImageData: Data? = nil){
+        self.image = backgroundImageData
     }
 }

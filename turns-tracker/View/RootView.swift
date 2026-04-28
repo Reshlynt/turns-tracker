@@ -18,19 +18,26 @@ struct RootView: View {
     
     var body: some View {
         ContentView(signInVM: signInVM)
-            .task {
+            .onAppear {
                 bootstrapSettings()
             }
     }
     
     private func bootstrapSettings() {
-        guard settingsArray.isEmpty else { return }
+        print("gamer")
+        // if the settingsArray is NOT empty, then return
+        if !settingsArray.isEmpty {
+            print(settingsArray.count)
+            return
+        }
+        print("gamer")
         
         let settings = AppSettings()
         modelContext.insert(settings)
         
         do {
             try modelContext.save()
+            
         } catch {
             print("Falled to create AppSettings: ", error)
         }

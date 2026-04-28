@@ -58,17 +58,6 @@ struct BackgroundPicker: View {
             }
         }
     }
-    
-//    private func convertDataToImage(_: Data?) -> Image? {
-//        guard
-//            let selectedPhotoData,
-//            let nsImage = NSImage(data: selectedPhotoData)
-//        else {
-//            return nil
-//        }
-//
-//        return Image(nsImage: nsImage)
-//    }
 }
 
 #Preview {

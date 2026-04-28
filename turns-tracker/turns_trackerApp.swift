@@ -24,6 +24,7 @@ struct turns_trackerApp: App {
         #if os(macOS)
         Settings {
             SettingsPage()
+                .modelContainer(for: [AppSettings.self])
         }
         #endif
     }
