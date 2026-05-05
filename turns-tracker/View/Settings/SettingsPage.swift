@@ -5,8 +5,6 @@
 //  Created by Scott Do on 3/29/26.
 //
 
-// TODO: I have a avatarImage
-
 import SwiftUI
 import PhotosUI
 import SwiftData

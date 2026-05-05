@@ -24,13 +24,22 @@ struct PersonDatabaseInfo: View {
     
     var body: some View {
         HStack {
-            Image("cat-meme")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 50)
-                .clipShape(RoundedRectangle(cornerRadius: 6))
-                .padding(.horizontal, 10)
-                .padding(.vertical, 5)
+            if let testPic = DataToImageConverter.convertDataToImage(photoData: person.profilePictureData){
+                testPic
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 50)
+                    .clipShape(RoundedRectangle(cornerRadius: 6))
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 5)
+            }
+//            Image("cat-meme")
+//                .resizable()
+//                .scaledToFit()
+//                .frame(width: 50)
+//                .clipShape(RoundedRectangle(cornerRadius: 6))
+//                .padding(.horizontal, 10)
+//                .padding(.vertical, 5)
             
             VStack {
                 Text(person.name)
@@ -39,11 +48,10 @@ struct PersonDatabaseInfo: View {
                 Text("PIN: " + person.pin)
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
-                    .foregroundStyle(.black)
             }
             
             Text("Pay: \(payRateText)")
-                .foregroundStyle(.black)
+                
             Spacer()
         }
     }

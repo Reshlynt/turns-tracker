@@ -19,18 +19,23 @@ final class Person: Identifiable, ObservableObject {
     @Published
     var taskList: [TaskAssignment] = []
     
+    @Attribute(.externalStorage)
+    var profilePictureData: Data?
+    
     init (
         name: String = "John",
         pin: String? = nil,
         checkedIn: Bool = false,
         payRate: Decimal = 0.0,
-        taskList: [TaskAssignment] = []
+        taskList: [TaskAssignment] = [],
+        profilePictureData: Data? = nil
     ) {
         self.name = name
         self.pin = pin ?? Self.generatePinString()
         self.checkedIn = checkedIn
         self.payRate = payRate
         self.taskList = taskList
+        self.profilePictureData = profilePictureData
     }
 
     

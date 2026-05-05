@@ -5,8 +5,6 @@
 //  Created by Scott Do on 10/9/25.
 //
 
-// TODO: This struct operates as dividing sections and views into smaller structs for easier readibility and comprehension for the coder. This struct in particular is meant to show a person's picture and name.
-
 import SwiftUI
 
 struct PersonQuickInfo: View {
@@ -16,13 +14,15 @@ struct PersonQuickInfo: View {
     var body: some View {
         VStack {
             // TODO: Figure out how to get an image of a person. Basically a profile picture. Currently it has only a placeholder of cat-meme but it needs to be replaced later.
-            Image("cat-meme")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 50)
-                .clipShape(RoundedRectangle(cornerRadius: 6))
-                .padding(.horizontal, 10)
-                .padding(.vertical, 5)
+            if let testPic = DataToImageConverter.convertDataToImage(photoData: person.profilePictureData){
+                testPic
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 50)
+                    .clipShape(RoundedRectangle(cornerRadius: 6))
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 5)
+            }
             Text(person.name)
         }
         .padding()

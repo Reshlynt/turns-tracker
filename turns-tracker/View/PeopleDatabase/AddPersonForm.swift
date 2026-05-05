@@ -5,15 +5,17 @@
 //  Created by Scott Do on 11/4/25.
 //
 // A sheet View to take in user input and create a Person object to store into the database.
-// TODO: Take in user input. Allow them to confirm their choice. Save the result into SwiftData.
 
 import SwiftUI
 import SwiftData
+import PhotosUI
 
 struct AddPersonForm: View {
     
     // State variables
     @State private var name = ""
+    @State private var backgroundPhoto: PhotosPickerItem?
+    @State private var selectedPhotoData: Data?
     
     // Function variables
     var onAdd: (Person) -> Void
@@ -27,11 +29,42 @@ struct AddPersonForm: View {
                 .font(.caption)
             TextField("Name", text: $name, prompt: Text("John Doe"))
                 .padding()
+            
+            //TODO: Allow the user to assign the Person an Image.
+            PhotosPicker(selection: $backgroundPhoto,
+                         matching: .images,
+                         photoLibrary: .shared()) {
+                Label("Assign Profile Picture", systemImage: "photo")
+            }
+            
+            if let testPic = DataToImageConverter.convertDataToImage(photoData: selectedPhotoData){
+                testPic
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: 300, maxHeight: 200)
+            }
+            
+            if selectedPhotoData != nil {
+                Button(role: .destructive) {
+                    withAnimation {
+                        backgroundPhoto = nil
+                        selectedPhotoData = nil
+                    }
+                } label: {
+                    Label("Remove Image", systemImage: "xmark")
+                        .foregroundStyle(.red)
+                }
+            }
+        }
+        .task(id: backgroundPhoto) {
+            if let data = try? await backgroundPhoto?.loadTransferable(type: Data.self) {
+                selectedPhotoData = data
+            }
         }
         .toolbar {
             ToolbarItemGroup {
                 Button("Add") {
-                    let newPerson = Person(name: name)
+                    let newPerson = Person(name: name, profilePictureData: selectedPhotoData)
                     name = ""
                     onAdd(newPerson)
                 }

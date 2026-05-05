@@ -51,7 +51,6 @@ struct SignInForm: View {
                     }
                     ToolbarItem {
                         Button("Cancel") {
-                            //TODO: Create function to cancel operation
                             pin = ""
                             onCancel()
                         }

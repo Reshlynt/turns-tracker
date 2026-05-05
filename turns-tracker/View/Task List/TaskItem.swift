@@ -37,7 +37,6 @@ struct TaskItem: View {
         .contentShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
         .contextMenu {
             Button("Delete task") {
-                //TODO: Delete this task
                 onDeletion()
             }
         }

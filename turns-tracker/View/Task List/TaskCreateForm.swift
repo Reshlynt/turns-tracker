@@ -20,7 +20,6 @@ struct TaskCreateForm: View {
     
     var body: some View {
         VStack {
-            //TODO: Allow the user to pick a picture
             if let nsImage = NSImage(contentsOfFile: selectImagePath) {
                 Image(nsImage: nsImage)
                     .resizable()

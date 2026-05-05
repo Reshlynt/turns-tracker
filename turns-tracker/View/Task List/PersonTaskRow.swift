@@ -5,7 +5,6 @@
 //  Created by Scott Do on 10/9/25.
 //
 
-// TODO: Whwn there is a new task update, find the new person who is available. If they are availale, create a visual indicator for it.
 
 // It goes something like this:
 // A task is put into the taskbar. That is the DropDestination action in this code. Then an algorithm is automatically triggered to find the next available person for work. An alert of some kind is triggered for a color change to allow the user to easily identify who can work. Once another task is dragged in, the process repeats.

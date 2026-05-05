@@ -41,7 +41,6 @@ struct SignInList: View {
             .toolbar {
                 ToolbarItemGroup {
                     Button {
-                        // TODO: Prompt the user to add a person via the sign in form.
                         showSignInForm = true
                     } label: {
                         Label("Add", systemImage: "plus")

@@ -27,10 +27,8 @@ struct RootView: View {
         print("gamer")
         // if the settingsArray is NOT empty, then return
         if !settingsArray.isEmpty {
-            print(settingsArray.count)
             return
         }
-        print("gamer")
         
         let settings = AppSettings()
         modelContext.insert(settings)
