@@ -38,7 +38,8 @@ struct ContentView: View {
                 if let testPic = DataToImageConverter.convertDataToImage(photoData: settings.image){
                     testPic
                         .resizable()
-                        .scaledToFit()
+                        .scaledToFill()
+                        .clipped()
                 }
             }
         }
