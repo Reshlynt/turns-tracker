@@ -27,7 +27,7 @@ final class TaskAssignment: Identifiable, Transferable, Hashable, Sendable, Coda
     init(title: String = "", imageName: String = "cat-meme", pricing: Decimal = 0.0) {
         self.title = title
         self.imageName = imageName
-        self.pricing = 0.0
+        self.pricing = pricing
     }
     
     // MARK: - Codable Conformance

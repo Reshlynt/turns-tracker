@@ -17,6 +17,7 @@ struct SignInView: View {
                 .frame(minWidth: 220, idealWidth: 700)            // never collapse smaller than ~220
                 .frame(maxWidth: .infinity)      // allow expansion if window grows
                 .layoutPriority(2)
+                .scrollContentBackground(.hidden)
             TaskListing()
                 .frame(minWidth: 300) // prefer a wider task column
                 .frame(maxWidth: .infinity)

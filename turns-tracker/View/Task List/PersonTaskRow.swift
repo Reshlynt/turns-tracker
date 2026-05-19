@@ -13,6 +13,8 @@ import SwiftUI
 
 struct PersonTaskRow: View {
 
+    @Environment(\.modelContext) private var modelContext
+    
     // Bindings
     @Binding var taskList: [TaskAssignment]
     @ObservedObject var vm: SignInViewModel
@@ -52,8 +54,10 @@ struct PersonTaskRow: View {
         .padding(.horizontal)
         .dropDestination(for: TaskAssignment.self) { droppedTasks, location in
             taskList.append(contentsOf: droppedTasks)
-            vm.updateWage(money: droppedTasks.first?.pricing)
+            vm.updateWage(for: droppedTasks)
             vm.updateNextAvailable()
+            try? modelContext.save()
+            print("Dropped total:", droppedTasks.reduce(0, { $0 + $1.pricing }))
             return true
         }
     }

@@ -11,6 +11,7 @@ import AppKit
 struct TaskCreateForm: View {
     
     @State var taskName: String = ""
+    @State var taskPrice: String = ""
     @State private var selectImagePath: String = "cat-meme"
     @State private var selectImageName: String = "cat-meme"
     
@@ -45,11 +46,14 @@ struct TaskCreateForm: View {
             
             TextField("Name", text: $taskName, prompt: Text("Name your task"))
                 .padding()
+            
+            TextField("Price", text: $taskPrice, prompt: Text("Choose the price"))
         }
         .toolbar {
             ToolbarItemGroup {
                 Button("Add") {
-                    let newTask = TaskAssignment(title: taskName)
+                    let price = Decimal(string: taskPrice) ?? 0
+                    let newTask = TaskAssignment(title: taskName, pricing: price)
                     taskName = ""
                     onAdd(newTask)
                 }
@@ -58,6 +62,7 @@ struct TaskCreateForm: View {
                 
                 Button(role: .cancel) {
                     taskName = ""
+                    taskPrice = ""
                     onCancel()
                 } label: {
                     Text("Cancel")

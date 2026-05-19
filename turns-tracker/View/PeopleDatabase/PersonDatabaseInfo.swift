@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PersonDatabaseInfo: View {
     
-    @State var person: Person
+    @Bindable var person: Person
     
     let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()

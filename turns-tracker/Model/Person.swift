@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-final class Person: Identifiable, ObservableObject {
+final class Person: Identifiable {
     @Attribute(.unique) var id = UUID()
     var name: String
     var pin: String
