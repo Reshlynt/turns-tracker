@@ -16,9 +16,11 @@ struct PersonTaskRow: View {
     @Environment(\.modelContext) private var modelContext
     
     // Bindings
-    @Binding var taskList: [TaskAssignment]
+    let person: Person
     @ObservedObject var vm: SignInViewModel
     @State var colorChangeOnAvailable: Bool
+    var onDeletion: () -> Void
+    
     
     // Task capsule information
     let capsuleWidth: CGFloat = 55
@@ -36,7 +38,7 @@ struct PersonTaskRow: View {
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 30) {
-                    ForEach(taskList) { task in
+                    ForEach(person.taskList) { task in
                         TaskItem(taskItem: task) {
                             deleteTask(task)
                         }
@@ -53,18 +55,24 @@ struct PersonTaskRow: View {
         .padding(.vertical)
         .padding(.horizontal)
         .dropDestination(for: TaskAssignment.self) { droppedTasks, location in
-            taskList.append(contentsOf: droppedTasks)
+            person.taskList.append(contentsOf: droppedTasks)
             vm.updateWage(for: droppedTasks)
             vm.updateNextAvailable()
             try? modelContext.save()
             print("Dropped total:", droppedTasks.reduce(0, { $0 + $1.pricing }))
             return true
         }
+        .contextMenu {
+            //TODO: Create an operation to cancel a single person.
+            Button("Delete person from list") {
+                onDeletion()
+            }
+        }
     }
     
     // MARK: - Helper Functions
     private func deleteTask(_ task: TaskAssignment) {
-        taskList.removeAll { $0.id == task.id }
+        person.taskList.removeAll { $0.id == task.id }
     }
 }
 
@@ -82,5 +90,6 @@ struct PersonTaskRow: View {
     
     let vm = SignInViewModel()
 
-    PersonTaskRow(taskList: $taskRowTest, vm: vm, colorChangeOnAvailable: false)
+    let person = Person()
+    PersonTaskRow(person: person, vm: vm, colorChangeOnAvailable: false, onDeletion: { } )
 }

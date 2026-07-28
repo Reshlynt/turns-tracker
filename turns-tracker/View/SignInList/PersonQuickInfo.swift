@@ -13,7 +13,6 @@ struct PersonQuickInfo: View {
     
     var body: some View {
         VStack {
-            // TODO: Figure out how to get an image of a person. Basically a profile picture. Currently it has only a placeholder of cat-meme but it needs to be replaced later.
             if let testPic = DataToImageConverter.convertDataToImage(photoData: person.profilePictureData){
                 testPic
                     .resizable()

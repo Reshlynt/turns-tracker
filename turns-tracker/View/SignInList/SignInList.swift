@@ -21,15 +21,23 @@ struct SignInList: View {
             List {
                 ForEach(vm.signedInPeople.reversed().indices, id: \.self) { index in
                     let reversedIndex = vm.signedInPeople.count - 1 - index
+                    let personToSignIn = vm.signedInPeople[reversedIndex]
                     HStack {
-                        PersonQuickInfo(person: vm.signedInPeople[reversedIndex])
+                        PersonQuickInfo(person: personToSignIn)
                         
-                        // What about if this finds the person?
-                        
-                        if vm.signedInPeople[reversedIndex] == vm.nextAvailable {
-                            PersonTaskRow(taskList: $vm.signedInPeople[reversedIndex].taskList, vm: vm, colorChangeOnAvailable: true)
-                        } else {
-                            PersonTaskRow(taskList: $vm.signedInPeople[reversedIndex].taskList, vm: vm, colorChangeOnAvailable: false)
+//                        if vm.signedInPeople[reversedIndex] == vm.nextAvailable {
+//                            PersonTaskRow(taskList: $vm.signedInPeople[reversedIndex].taskList, vm: vm, colorChangeOnAvailable: true) {
+//                                
+//                            }
+//                        } else {
+//                            PersonTaskRow(taskList: $vm.signedInPeople[reversedIndex].taskList, vm: vm, colorChangeOnAvailable: false) {
+//                                
+//                            }
+//                        }
+                        PersonTaskRow(person: personToSignIn,
+                                      vm: vm,
+                                      colorChangeOnAvailable: personToSignIn == vm.nextAvailable) {
+                            vm.remove(personToSignIn)
                         }
                     }
                 }

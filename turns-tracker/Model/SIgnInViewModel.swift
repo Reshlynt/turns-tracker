@@ -35,7 +35,7 @@ final class SignInViewModel: ObservableObject {
     }
     
     // MARK: - Helper Functions
-    func nextAvailablePerson() -> Person? {
+    private func nextAvailablePerson() -> Person? {
         guard !signedInPeople.isEmpty else { return nil }
         
         return signedInPeople.min { person1, person2 in
