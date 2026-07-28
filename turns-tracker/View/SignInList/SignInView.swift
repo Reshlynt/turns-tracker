@@ -23,10 +23,8 @@ struct SignInView: View {
                 .frame(maxWidth: .infinity)
         }
         .frame(minWidth: 700, minHeight: 420) // sensible minimum window size for the whole view
-        
     }
 }
-
 #Preview {
     let person = Person(name: "james")
     let vm = SignInViewModel(initial: [person])

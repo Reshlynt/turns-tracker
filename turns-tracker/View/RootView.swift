@@ -24,7 +24,6 @@ struct RootView: View {
     }
     
     private func bootstrapSettings() {
-        print("gamer")
         // if the settingsArray is NOT empty, then return
         if !settingsArray.isEmpty {
             return

@@ -31,10 +31,7 @@ struct SignInList: View {
                         } else {
                             PersonTaskRow(taskList: $vm.signedInPeople[reversedIndex].taskList, vm: vm, colorChangeOnAvailable: false)
                         }
-                        
-                        
                     }
-                    
                 }
             }
             .navigationTitle("Signed In")
@@ -53,7 +50,6 @@ struct SignInList: View {
                         Label("Remove All", systemImage: "trash")
                             .labelStyle(.titleAndIcon)
                     }
-
                 }
             }
             .sheet(isPresented: $showSignInForm) {
@@ -67,14 +63,10 @@ struct SignInList: View {
                 } onCancel: {
                     showSignInForm = false
                 }
-
             }
         }
-    
 }
-
 #Preview {
     let vm = SignInViewModel()
-    
     SignInList( vm: vm)
 }

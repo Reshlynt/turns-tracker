@@ -30,7 +30,6 @@ struct AddPersonForm: View {
             TextField("Name", text: $name, prompt: Text("John Doe"))
                 .padding()
             
-            //TODO: Allow the user to assign the Person an Image.
             PhotosPicker(selection: $backgroundPhoto,
                          matching: .images,
                          photoLibrary: .shared()) {

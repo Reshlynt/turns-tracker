@@ -15,6 +15,9 @@ struct PeopleDatabase: View {
     
     // Add-sheet to add in people
     @State private var showingAddSheet = false
+    @State private var showPriceChange = false
+    
+    @State private var priceChange = ""
     
     // Delete all state
     @State private var deleteAllWarning = false
@@ -35,6 +38,26 @@ struct PeopleDatabase: View {
                             deletePerson(person)
                         } label: {
                             Label("Delete", systemImage: "trash")
+                        }
+                    }
+                    .contextMenu {
+                        //TODO: Present a menu to allow the user to change the pay as needed.
+                        Button("Change pay") {
+                            showPriceChange = true
+                        }
+                    }
+                    .sheet(isPresented: $showPriceChange) {
+                        VStack {
+                            TextField("Name", text: $priceChange, prompt: Text("Change pay"))
+                            //TODO: Buttons need actions to do something
+                            HStack {
+                                Button("Confirm") {
+                                    
+                                }
+                                Button("Cancel") {
+                                    
+                                }
+                            }
                         }
                     }
                 }
@@ -106,6 +129,11 @@ struct PeopleDatabase: View {
         } catch {
             print(error)
         }
+    }
+    
+    /// Given a person, change its pay.
+    private func changePay(_ person: Person) {
+        
     }
 }
 

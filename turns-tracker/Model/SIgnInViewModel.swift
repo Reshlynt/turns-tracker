@@ -4,6 +4,7 @@
 //
 //  Created by Scott Do on 2/4/26.
 //
+// This is a model that controls the mechanics of the Sign In view. It is a singleton and there should only ever be one during runtime.
 
 import Foundation
 import Combine

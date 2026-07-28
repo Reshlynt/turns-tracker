@@ -4,6 +4,8 @@
 //
 //  Created by Scott Do on 3/4/26.
 //
+// Contains the persistent elements of the user's preferences for an application.
+// There should only ever be ONE AppSettings.
 
 import Foundation
 import SwiftData

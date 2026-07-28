@@ -30,10 +30,10 @@ struct SettingsPage: View {
                     Label("Background", systemImage: "photo.fill")
                 }
                 
-                PicPresentTest()
-                    .tabItem {
-                        Label("test", systemImage: "checkmark")
-                    }
+//                PicPresentTest()
+//                    .tabItem {
+//                        Label("test", systemImage: "checkmark")
+//                    }
             }
             .frame(minWidth: 500, minHeight: 600)
         } else {
