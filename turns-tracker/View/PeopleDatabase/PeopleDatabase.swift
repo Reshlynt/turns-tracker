@@ -21,6 +21,7 @@ struct PeopleDatabase: View {
     
     // Delete all state
     @State private var deleteAllWarning = false
+    @State var showInvalidDecimal = false
         
     var body: some View {
         VStack {
@@ -48,20 +49,33 @@ struct PeopleDatabase: View {
                     }
                     .sheet(isPresented: $showPriceChange) {
                         VStack {
+                            Text("Insert new pay. Decimal inputs accepted only.")
+                            if (showInvalidDecimal) {
+                                Text("Invalid input.")
+                            }
                             TextField("Name", text: $priceChange, prompt: Text("Change pay"))
                             //TODO: Buttons need actions to do something
                             HStack {
                                 Button("Confirm") {
+                                    if let strToDecimal = Decimal(string: priceChange, locale: Locale.current) {
+                                        person.payRate = strToDecimal
+                                        showInvalidDecimal = false
+                                        showPriceChange = false
+                                    } else {
+                                        showInvalidDecimal = true
+                                        print("Invalid decimal format")
+                                    }
                                     
                                 }
                                 Button("Cancel") {
-                                    
+                                    showPriceChange = false
                                 }
                             }
                         }
                     }
                 }
             }
+
             .navigationTitle("Database of Recorded Persons")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
